@@ -9,4 +9,12 @@ public class BlockState {
 		this.center = center;
 		this.size = size;
 	}
+	
+	public Point getCenter() {
+		return center;
+	}
+	
+	public Vector getSize() {
+		return size;
+	}
 }

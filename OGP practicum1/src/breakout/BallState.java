@@ -4,20 +4,24 @@ public class BallState {
 	// TODO: implement
 	
 	private final Point center;
-	private final int diameter;
-	private final Vector speed;
+	private final Vector size;
+	private final Vector velocity;
 	
-	public BallState(Point center, int diameter, Vector speed ) {
+	public BallState(Point center, Vector size, Vector velocity ) {
 		this.center = center;
-		this.diameter = diameter;
-		this.speed = speed;
+		this.size = size;
+		this.velocity = velocity;
 	}
 	
 	public Point getCenter() {
-		return null;
+		return center;
 	}
 	
 	public Vector getVelocity() {
-		return null;
+		return velocity;
+	}
+	
+	public Vector getSize() {
+		return size;
 	}
 }
