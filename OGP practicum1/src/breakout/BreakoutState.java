@@ -14,6 +14,13 @@ public class BreakoutState {
 	}
 
 	public BlockState[] getBlocks() {
+		BlockState[] blocks = {};
+		for (int x=5; x < 50000; x = x + 5000 ) {
+			for (int y=5; x < 50000; y = y + 5000 ) {
+				BlockState block = new BlockState(new Point(x,y), new Vector(10,10));
+				
+			}
+		}
 		return null;
 	}
 
