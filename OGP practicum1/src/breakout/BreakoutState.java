@@ -3,8 +3,17 @@ package breakout;
 // TODO: implement, document
 public class BreakoutState {
 
+	private final BallState[] balls;
+	private final BlockState[] blocks;
+	private final Point bottomRight;
+	private final PaddleState paddle;
+	
 	
 	public BreakoutState(BallState[] balls, BlockState[] blocks, Point bottomRight, PaddleState paddle) {
+		this.balls = balls;
+		this.blocks = blocks;
+		this.bottomRight = bottomRight;
+		this.paddle = paddle;
 	}
 	
 	public BallState[] getBalls() {
@@ -25,12 +34,12 @@ public class BreakoutState {
 	}
 
 	public PaddleState getPaddle() {
-		PaddleState paddle = new PaddleState(new Point(25000,5000), new Vector(5000,1000) );
+		PaddleState paddle = new PaddleState(paddle.getCenter(),this.getSize());
 		return paddle;
 	}
 
 	public Point getBottomRight() {
-		return null;
+		return ;
 	}
 
 	public void tick(int paddleDir) {
