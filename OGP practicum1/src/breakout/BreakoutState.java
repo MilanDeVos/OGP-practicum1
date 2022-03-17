@@ -8,7 +8,8 @@ public class BreakoutState {
 	}
 	
 	public BallState[] getBalls() {
-		return null;
+		BallState ball = new BallState;
+		return ball(new Point(0,0), new Vector(700, 700), new Vector(5,7) );
 	}
 
 	public BlockState[] getBlocks() {
