@@ -18,7 +18,8 @@ public class BreakoutState {
 	}
 
 	public PaddleState getPaddle() {
-		return null;
+		PaddleState paddle = new PaddleState(new Point(25000,5000), new Vector(5000,1000) );
+		return paddle;
 	}
 
 	public Point getBottomRight() {
