@@ -18,13 +18,14 @@ public class GameMap {
 		Point blockTL = bottomLeft.plus(marginBL);
 		Point blockBR = blockTL.plus(size);
 		// TODO: return a block with given top left (`blockTL`) and bottom right (`blockBR`) Point  
-		return new BlockState(blockTL, blockBR);
+		Point center = new Point( (blockTL.getX() + blockBR.getX())/2, (blockTL.getY() + blockBR.getY())/2 );
+		return new BlockState(center, size);
 	}
 	private static PaddleState createPaddle(Point bottomLeft) {
 		Vector size = new Vector(WIDTH/BLOCK_COLUMNS/2,HEIGHT/BLOCK_LINES/2);
 		Point center = bottomLeft.plus(size);
 		// TODO: return a paddle with given center 
-		return new PaddleState(center);
+		return new PaddleState(center, size);
 	}
 	private static BallState createBall(Point bottomLeft) {
 		Vector centerD = new Vector(WIDTH/BLOCK_COLUMNS/2,HEIGHT/BLOCK_LINES/2);

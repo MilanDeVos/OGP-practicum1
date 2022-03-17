@@ -2,11 +2,11 @@ package breakout;
 
 public class BlockState {
 	// TODO: implement
-	private final Point topLeft;
-	private final Point topRight;
+	private final Point center;
+	private final Vector size;
 	
-	public BlockState(Point topLeft, Point topRight) {
-		this.topLeft = topLeft;
-		this.topRight = topRight;
+	public BlockState(Point center, Vector size) {
+		this.center = center;
+		this.size = size;
 	}
 }
