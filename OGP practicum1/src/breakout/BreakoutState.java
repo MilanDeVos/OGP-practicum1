@@ -37,9 +37,21 @@ public class BreakoutState {
 
 	public void tick(int paddleDir) {
 		for (int i = 0 ; i < balls.length ; i++) {
+			// ball moves
 			Point nextCenter = balls[i].getCenter().plus(balls[i].getVelocity());
 			balls[i] = new BallState(nextCenter, balls[i].getSize(), balls[i].getVelocity());
-
+			// ball bounces on walls
+			if (balls[i].getCenter().getX() == 50000) { // right wall
+				Vector newVelocity = balls[i].getVelocity().mirrorOver(new Vector(1,0));
+				balls[i] = new BallState(balls[i].getCenter(), balls[i].getSize(), newVelocity);
+			}
+			// ball gets removed
+			
+			// ball bounces on block
+			
+			// ball bounces on paddle
+			
+			// ball speedup
 		}
 	}
 
