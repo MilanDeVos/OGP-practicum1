@@ -31,7 +31,7 @@ public class GameMap {
 		Vector centerD = new Vector(WIDTH/BLOCK_COLUMNS/2,HEIGHT/BLOCK_LINES/2);
 		Point center = bottomLeft.plus(centerD);
 		int diameter = INIT_BALL_DIAMETER;
-		// TODO: return a ball with given `center`, `diameter` and initial speed `initSpeed` 
+		// TODO: return a ball with given `center`, `diameter` and initial velocity `INIT_BALL_VELOCITY` 
 		Vector size = new Vector(diameter, diameter);
 		return new BallState(center, size, INIT_BALL_VELOCITY);
 	}

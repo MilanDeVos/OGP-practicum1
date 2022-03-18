@@ -18,7 +18,8 @@ public class BreakoutState {
 	}
 	
 	public BallState[] getBalls() {
-		return balls;
+		BallState[] currentBalls = balls.clone();
+		return currentBalls;
 	}
 
 	public BlockState[] getBlocks() {
@@ -27,14 +28,18 @@ public class BreakoutState {
 		}
 
 	public PaddleState getPaddle() {
-		PaddleState newPaddle = new PaddleState(paddle.getCenter(), paddle.getSize()); // So paddle doesn't get leaked.
-		return newPaddle;
+		PaddleState currentPaddle = new PaddleState(paddle.getCenter(), paddle.getSize()); // So paddle doesn't get leaked.
+		return currentPaddle;
 	}
 	public Point getBottomRight() {
 		return bottomRight;
 	}
 
 	public void tick(int paddleDir) {
+		for (BallState ball : balls) {
+			Point newCenter = ball.getCenter().plus(ball.getVelocity());
+			ball = new BallState(newCenter, ball.getSize(), ball.getVelocity());
+		}
 	}
 
 	public void movePaddleRight() {
