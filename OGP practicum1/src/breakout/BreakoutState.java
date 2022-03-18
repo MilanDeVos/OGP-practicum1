@@ -34,7 +34,7 @@ public class BreakoutState {
 	}
 
 	public PaddleState getPaddle() {
-		PaddleState paddle = new PaddleState(paddle.getCenter(),this.getSize());
+		PaddleState paddle = new PaddleState(paddle.getCenter(), this.getSize());
 		return paddle;
 	}
 
