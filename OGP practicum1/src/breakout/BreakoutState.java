@@ -27,7 +27,7 @@ public class BreakoutState {
 		}
 
 	public PaddleState getPaddle() {
-		PaddleState newPaddle = new PaddleState(paddle.getCenter(), paddle.getSize());
+		PaddleState newPaddle = new PaddleState(paddle.getCenter(), paddle.getSize()); // So paddle doesn't get leaked.
 		return newPaddle;
 	}
 	public Point getBottomRight() {
@@ -54,6 +54,9 @@ public class BreakoutState {
 	}
 
 	public boolean isDead() {
+		if (balls.length == 0) {
+			return true;
+		}
 		return false;
 	}
 }
