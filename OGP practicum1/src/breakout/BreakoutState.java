@@ -6,7 +6,7 @@ public class BreakoutState {
 	private final BallState[] balls;
 	private final BlockState[] blocks;
 	private final Point bottomRight;
-	private final PaddleState paddle;
+	private final PaddleState paddle; 
 	
 	
 	public BreakoutState(BallState[] balls, BlockState[] blocks, Point bottomRight, PaddleState paddle) {
@@ -17,19 +17,18 @@ public class BreakoutState {
 	}
 	
 	public BallState[] getBalls() {
-		BallState currentBalls = new BallState(balls.getCenter(), balls.getVelocity(), balls.getSize());
-		return currentBalls;	//Dat moet hier array van balls zijn, staat nog voor 1 ball, begrijp het effe niet
+		return balls;
 	}
 
 	public BlockState[] getBlocks() {
+
 		return blocks;
-	}
+		}
 
 	public PaddleState getPaddle() {
 		PaddleState currentPaddle = new PaddleState(paddle.getCenter(), paddle.getSize());
 		return currentPaddle;
 	}
-
 	public Point getBottomRight() {
 		Point currentBottomRight = new Point(bottomRight.getX(),bottomRight.getY());
 		return currentBottomRight;
