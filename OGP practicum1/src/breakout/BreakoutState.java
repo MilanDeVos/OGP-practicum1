@@ -6,7 +6,8 @@ public class BreakoutState {
 	private final BallState[] balls;
 	private final BlockState[] blocks;
 	private final Point bottomRight;
-	private final PaddleState paddle; 
+	private PaddleState paddle; 
+	private final Vector move = new Vector(10, 0); 
 	
 	
 	public BreakoutState(BallState[] balls, BlockState[] blocks, Point bottomRight, PaddleState paddle) {
@@ -36,9 +37,15 @@ public class BreakoutState {
 	}
 
 	public void movePaddleRight() {
+		Point newCenter = paddle.getCenter().plus(move);
+		PaddleState newPaddle = new PaddleState(newCenter, paddle.getSize());
+		this.paddle = newPaddle;
 	}
 
 	public void movePaddleLeft() {
+		Point newCenter = paddle.getCenter().minus(move);
+		PaddleState newPaddle = new PaddleState(newCenter, paddle.getSize());
+		this.paddle = newPaddle;
 	}
 	
 	public boolean isWon() {
