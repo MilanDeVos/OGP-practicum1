@@ -3,7 +3,7 @@ package breakout;
 // TODO: implement, document
 public class BreakoutState {
 
-	private final BallState[] balls;
+	private  BallState[] balls;
 	private final BlockState[] blocks;
 	private final Point bottomRight;
 	private PaddleState paddle; 
@@ -36,9 +36,10 @@ public class BreakoutState {
 	}
 
 	public void tick(int paddleDir) {
-		for (BallState ball : balls) {
-			Point newCenter = ball.getCenter().plus(ball.getVelocity());
-			ball = new BallState(newCenter, ball.getSize(), ball.getVelocity());
+		for (int i = 0 ; i < balls.length ; i++) {
+			Point nextCenter = balls[i].getCenter().plus(balls[i].getVelocity());
+			balls[i] = new BallState(nextCenter, balls[i].getSize(), balls[i].getVelocity());
+
 		}
 	}
 
