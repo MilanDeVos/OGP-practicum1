@@ -6,7 +6,7 @@ public class BreakoutState {
 	private final BallState[] balls;
 	private final BlockState[] blocks;
 	private final Point bottomRight;
-	private final PaddleState paddle;
+	private final PaddleState paddle; 
 	
 	
 	public BreakoutState(BallState[] balls, BlockState[] blocks, Point bottomRight, PaddleState paddle) {
@@ -39,7 +39,7 @@ public class BreakoutState {
 	}
 
 	public Point getBottomRight() {
-		return ;
+		return null;
 	}
 
 	public void tick(int paddleDir) {
