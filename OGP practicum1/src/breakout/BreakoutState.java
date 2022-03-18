@@ -17,22 +17,22 @@ public class BreakoutState {
 	}
 	
 	public BallState[] getBalls() {
-		BallState ball = new BallState(new Point(0,0), new Vector(700, 700), new Vector(5,7));
-		BallState[] balls = {ball};
-		return balls;
+		BallState currentBalls = new BallState(balls.getCenter(), balls.getVelocity(), balls.getSize());
+		return currentBalls;	//Dat moet hier array van balls zijn, staat nog voor 1 ball, begrijp het effe niet
 	}
 
 	public BlockState[] getBlocks() {
-		return null;
+		return blocks;
 	}
 
 	public PaddleState getPaddle() {
-		PaddleState paddle = new PaddleState(paddle.getCenter(),this.getSize());
-		return paddle;
+		PaddleState currentPaddle = new PaddleState(paddle.getCenter(), paddle.getSize());
+		return currentPaddle;
 	}
 
 	public Point getBottomRight() {
-		return ;
+		Point currentBottomRight = new Point(bottomRight.getX(),bottomRight.getY());
+		return currentBottomRight;
 	}
 
 	public void tick(int paddleDir) {
