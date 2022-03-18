@@ -49,6 +49,10 @@ public class BreakoutState {
 				Vector newVelocity = balls[i].getVelocity().mirrorOver(new Vector(-1,0));
 				balls[i] = new BallState(balls[i].getCenter(), balls[i].getSize(), newVelocity);
 			}
+			if (balls[i].getCenter().getY() == 0) { // top wall
+				Vector newVelocity = balls[i].getVelocity().mirrorOver(new Vector(0,-1));
+				balls[i] = new BallState(balls[i].getCenter(), balls[i].getSize(), newVelocity);
+			}
 			// ball gets removed
 			
 			// ball bounces on block
