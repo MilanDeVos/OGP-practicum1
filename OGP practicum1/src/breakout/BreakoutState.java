@@ -27,7 +27,8 @@ public class BreakoutState {
 		}
 
 	public PaddleState getPaddle() {
-		return paddle;
+		PaddleState newPaddle = new PaddleState(paddle.getCenter(), paddle.getSize());
+		return newPaddle;
 	}
 	public Point getBottomRight() {
 		return bottomRight;
