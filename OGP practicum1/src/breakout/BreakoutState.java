@@ -26,12 +26,10 @@ public class BreakoutState {
 		}
 
 	public PaddleState getPaddle() {
-		PaddleState currentPaddle = new PaddleState(paddle.getCenter(), paddle.getSize());
-		return currentPaddle;
+		return paddle;
 	}
 	public Point getBottomRight() {
-		Point currentBottomRight = new Point(bottomRight.getX(),bottomRight.getY());
-		return currentBottomRight;
+		return bottomRight;
 	}
 
 	public void tick(int paddleDir) {
