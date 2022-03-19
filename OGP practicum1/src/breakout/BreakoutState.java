@@ -54,7 +54,15 @@ public class BreakoutState {
 				balls[i] = new BallState(balls[i].getCenter(), balls[i].getSize(), newVelocity);
 			}
 			// ball gets removed
-			
+			if (balls[i].getCenter().getY() >= 30000) {
+				BallState[] newBalls = new BallState[balls.length-1];
+				for (int j = 0 ; j < balls.length ; j++) {
+					if (balls[i] != balls[j]) {
+						newBalls[j] = balls[j];
+					}
+				balls = newBalls;
+				}
+			}
 			// ball bounces on block
 			
 			// ball bounces on paddle
