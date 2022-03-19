@@ -110,6 +110,9 @@ public class BreakoutState {
 	}
 	
 	public boolean isWon() {
+		if (blocks.length==0) {
+			return true;
+		}
 		return false;
 	}
 
