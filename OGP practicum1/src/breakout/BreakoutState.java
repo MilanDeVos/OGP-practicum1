@@ -72,18 +72,21 @@ public class BreakoutState {
 					if (balls[i].getCenter().getY() <= blocks[j].getCenter().getY() + blocks[j].getSize().getY()/2
 							&& balls[i].getCenter().getX() >= blocks[j].getCenter().getX() - blocks[j].getSize().getX()/2
 							&& balls[i].getCenter().getX() <= blocks[j].getCenter().getX() + blocks[j].getSize().getX()/2) {
-						BlockState[] newBlocks = new BlockState[blocks.length];
+						BlockState[] newBlocks = new BlockState[blocks.length-1];
 						for (int k = 0 ; k < blocks.length ; k++) {
 							if (blocks[j] != blocks[k]) {
-								newBlocks[k] = blocks[k];
-							
+								if (k<j) {
+									newBlocks[k] = blocks[k];
+								}
+							if (k>j) {
+								newBlocks[k-1] = blocks[k];
+								}
 							}
-							break;
 						}
 						blocks = newBlocks;
 						Vector newVelocity = balls[i].getVelocity().mirrorOver(new Vector(0,-1));
 						balls[i] = new BallState(balls[i].getCenter(), balls[i].getSize(), newVelocity);
-						break; //werkt ni elleuhp
+						break;
 					}
 				}
 				// ball bounces on paddle and speedup
