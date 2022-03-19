@@ -3,8 +3,8 @@ package breakout;
 // TODO: implement, document
 public class BreakoutState {
 
-	private  BallState[] balls;
-	private final BlockState[] blocks;
+	private BallState[] balls;
+	private BlockState[] blocks;
 	private final Point bottomRight;
 	private PaddleState paddle; 
 	private final Vector move = new Vector(10, 0); 
@@ -23,8 +23,8 @@ public class BreakoutState {
 	}
 
 	public BlockState[] getBlocks() {
-
-		return blocks;
+		BlockState[] currentBlocks = blocks.clone();
+		return currentBlocks;
 		}
 
 	public PaddleState getPaddle() {
@@ -36,38 +36,47 @@ public class BreakoutState {
 	}
 
 	public void tick(int paddleDir) {
-		for (int i = 0 ; i < balls.length ; i++) {
-			// ball moves
-			Point nextCenter = balls[i].getCenter().plus(balls[i].getVelocity());
-			balls[i] = new BallState(nextCenter, balls[i].getSize(), balls[i].getVelocity());
-			// ball bounces on walls
-			if (balls[i].getCenter().getX() == 50000) { // right wall
-				Vector newVelocity = balls[i].getVelocity().mirrorOver(new Vector(1,0));
-				balls[i] = new BallState(balls[i].getCenter(), balls[i].getSize(), newVelocity);
-			}
-			if (balls[i].getCenter().getX() == 0) { // left wall
-				Vector newVelocity = balls[i].getVelocity().mirrorOver(new Vector(-1,0));
-				balls[i] = new BallState(balls[i].getCenter(), balls[i].getSize(), newVelocity);
-			}
-			if (balls[i].getCenter().getY() == 0) { // top wall
-				Vector newVelocity = balls[i].getVelocity().mirrorOver(new Vector(0,-1));
-				balls[i] = new BallState(balls[i].getCenter(), balls[i].getSize(), newVelocity);
-			}
-			// ball gets removed
-			if (balls[i].getCenter().getY() >= 30000) {
-				BallState[] newBalls = new BallState[balls.length-1];
-				for (int j = 0 ; j < balls.length ; j++) {
-					if (balls[i] != balls[j]) {
-						newBalls[j] = balls[j];
+		if (balls.length > 0) {
+			for (int i = 0 ; i < balls.length ; i++) {
+				// ball moves
+				Point nextCenter = balls[i].getCenter().plus(balls[i].getVelocity());
+				balls[i] = new BallState(nextCenter, balls[i].getSize(), balls[i].getVelocity());
+				// ball bounces on walls
+				if (balls[i].getCenter().getX() == 50000) { // right wall
+					Vector newVelocity = balls[i].getVelocity().mirrorOver(new Vector(1,0));
+					balls[i] = new BallState(balls[i].getCenter(), balls[i].getSize(), newVelocity);
+				}
+				if (balls[i].getCenter().getX() == 0) { // left wall
+					Vector newVelocity = balls[i].getVelocity().mirrorOver(new Vector(-1,0));
+					balls[i] = new BallState(balls[i].getCenter(), balls[i].getSize(), newVelocity);
+				}
+				if (balls[i].getCenter().getY() == 0) { // top wall
+					Vector newVelocity = balls[i].getVelocity().mirrorOver(new Vector(0,-1));
+					balls[i] = new BallState(balls[i].getCenter(), balls[i].getSize(), newVelocity);
+				}
+				// ball gets removed
+				if (balls[i].getCenter().getY() >= 30000) {
+					BallState[] newBalls = new BallState[balls.length-1];
+					for (int j = 0 ; j < balls.length ; j++) {
+						if (balls[i] != balls[j]) {
+							newBalls[j] = balls[j];
+						}
+					balls = newBalls;
 					}
-				balls = newBalls;
+				}
+				if (balls.length == 0) {
+					break;
+				}
+				// ball bounces on block
+				
+				// ball bounces on paddle and speedup
+				if (balls[i].getCenter().getY() == paddle.getCenter().getY() - paddle.getSize().getY()/2 
+						&& balls[i].getCenter().getX() <= paddle.getCenter().getX() + paddle.getSize().getX()/2 
+						&& balls[i].getCenter().getX() >= paddle.getCenter().getX() - paddle.getSize().getX()/2) {
+					Vector newVelocity = balls[i].getVelocity().mirrorOver(new Vector(0,1));
+					balls[i] = new BallState(balls[i].getCenter(), balls[i].getSize(), newVelocity);
 				}
 			}
-			// ball bounces on block
-			
-			// ball bounces on paddle
-			
-			// ball speedup
 		}
 	}
 
