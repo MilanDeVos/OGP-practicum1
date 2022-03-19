@@ -69,9 +69,10 @@ public class BreakoutState {
 				}
 				// ball bounces on block, block gets removed
 				for (int j = 0 ; j < blocks.length ; j++) {
-					if (balls[i].getCenter().getY() <= blocks[j].getCenter().getY() + blocks[j].getSize().getY()/2
+					if (balls[i].getCenter().getY() - balls[i].getSize().getY()/2 <= blocks[j].getCenter().getY() + blocks[j].getSize().getY()/2
+							&& balls[i].getCenter().getY() >= blocks[j].getCenter().getY() + blocks[j].getSize().getY()/256
 							&& balls[i].getCenter().getX() >= blocks[j].getCenter().getX() - blocks[j].getSize().getX()/2
-							&& balls[i].getCenter().getX() <= blocks[j].getCenter().getX() + blocks[j].getSize().getX()/2) {
+							&& balls[i].getCenter().getX() <= blocks[j].getCenter().getX() + blocks[j].getSize().getX()/2) { //botside
 						BlockState[] newBlocks = new BlockState[blocks.length-1];
 						for (int k = 0 ; k < blocks.length ; k++) {
 							if (blocks[j] != blocks[k]) {
@@ -84,17 +85,59 @@ public class BreakoutState {
 							}
 						}
 						blocks = newBlocks;
-						Vector newVelocity = balls[i].getVelocity().mirrorOver(new Vector(0,-1));
+						Vector newVelocity = balls[i].getVelocity().mirrorOver(new Vector(0,1));
+						balls[i] = new BallState(balls[i].getCenter(), balls[i].getSize(), newVelocity);
+						break;
+					}
+					else if (balls[i].getCenter().getX() - balls[i].getSize().getX()/2 <= blocks[j].getCenter().getX() + blocks[j].getSize().getX()/2
+							 && balls[i].getCenter().getX() <= blocks[j].getCenter().getX() + blocks[j].getSize().getX()/16
+							 && balls[i].getCenter().getY() >= blocks[j].getCenter().getY() - blocks[j].getSize().getY()/2
+							 && balls[i].getCenter().getY() <= blocks[j].getCenter().getY() + blocks[j].getSize().getY()/2) { //right side
+						BlockState[] newBlocks = new BlockState[blocks.length-1];
+						for (int k = 0 ; k < blocks.length ; k++) {
+							if (blocks[j] != blocks[k]) {
+								if (k<j) {
+									newBlocks[k] = blocks[k];
+								}
+							if (k>j) {
+								newBlocks[k-1] = blocks[k];
+								}
+							}
+						}
+						blocks = newBlocks;
+						Vector newVelocity = balls[i].getVelocity().mirrorOver(new Vector(1,0));
+						balls[i] = new BallState(balls[i].getCenter(), balls[i].getSize(), newVelocity);
+						break;
+					}
+					else if (balls[i].getCenter().getX() + balls[i].getSize().getX()/2 <= blocks[j].getCenter().getX() + blocks[j].getSize().getX()/2
+							 && balls[i].getCenter().getX() <= blocks[j].getCenter().getX() + blocks[j].getSize().getX()/16
+							 && balls[i].getCenter().getY() >= blocks[j].getCenter().getY() - blocks[j].getSize().getY()/2
+							 && balls[i].getCenter().getY() <= blocks[j].getCenter().getY() + blocks[j].getSize().getY()/2 ) { //left side
+						BlockState[] newBlocks = new BlockState[blocks.length-1];
+						for (int k = 0 ; k < blocks.length ; k++) {
+							if (blocks[j] != blocks[k]) {
+								if (k<j) {
+									newBlocks[k] = blocks[k];
+								}
+							if (k>j) {
+								newBlocks[k-1] = blocks[k];
+								}
+							}
+						}
+						blocks = newBlocks;
+						Vector newVelocity = balls[i].getVelocity().mirrorOver(new Vector(1,0));
 						balls[i] = new BallState(balls[i].getCenter(), balls[i].getSize(), newVelocity);
 						break;
 					}
 				}
+				
 				// ball bounces on paddle and speedup
-				if (balls[i].getCenter().getY() >= paddle.getCenter().getY() - paddle.getSize().getY()/2 
+				if (balls[i].getCenter().getY() + balls[i].getSize().getY()/2 >= paddle.getCenter().getY() - paddle.getSize().getY()/2 
 						&& balls[i].getCenter().getY() <= paddle.getCenter().getY()
 						&& balls[i].getCenter().getX() >= paddle.getCenter().getX() - paddle.getSize().getX()/2
 						&& balls[i].getCenter().getX() <= paddle.getCenter().getX() + paddle.getSize().getX()/2) {
 					Vector newVelocity = balls[i].getVelocity().mirrorOver(new Vector(0,1));
+					//newVelocity = newVelocity.scaled(paddleDir/5);
 					balls[i] = new BallState(balls[i].getCenter(), balls[i].getSize(), newVelocity);
 				}
 			}
