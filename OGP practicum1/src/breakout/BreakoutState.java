@@ -2,6 +2,10 @@ package breakout;
 
 // TODO: implement, document
 public class BreakoutState {
+	
+	/**
+	 * 
+	 */
 
 	private BallState[] balls;
 	private BlockState[] blocks;
@@ -42,20 +46,20 @@ public class BreakoutState {
 				Point nextCenter = balls[i].getCenter().plus(balls[i].getVelocity());
 				balls[i] = new BallState(nextCenter, balls[i].getSize(), balls[i].getVelocity());
 				// ball bounces on walls
-				if (balls[i].getCenter().getX() + balls[i].getSize().getX()/2 == 50000) { // right wall
+				if (balls[i].getCenter().getX() + balls[i].getSize().getX()/2 >= getBottomRight().getX()) { // right wall
 					Vector newVelocity = balls[i].getVelocity().mirrorOver(new Vector(1,0));
 					balls[i] = new BallState(balls[i].getCenter(), balls[i].getSize(), newVelocity);
 				}
-				if (balls[i].getCenter().getX() - balls[i].getSize().getX()/2 == 0) { // left wall
+				if (balls[i].getCenter().getX() - balls[i].getSize().getX()/2 <= Point.ORIGIN.getX()) { // left wall
 					Vector newVelocity = balls[i].getVelocity().mirrorOver(new Vector(-1,0));
 					balls[i] = new BallState(balls[i].getCenter(), balls[i].getSize(), newVelocity);
 				}
-				if (balls[i].getCenter().getY() - balls[i].getSize().getY()/2 == 0) { // top wall
+				if (balls[i].getCenter().getY() - balls[i].getSize().getY()/2 <= Point.ORIGIN.getY()) { // top wall
 					Vector newVelocity = balls[i].getVelocity().mirrorOver(new Vector(0,-1));
 					balls[i] = new BallState(balls[i].getCenter(), balls[i].getSize(), newVelocity);
 				}
 				// ball gets removed
-				if (balls[i].getCenter().getY() >= 30000) {
+				if (balls[i].getCenter().getY() >= getBottomRight().getY()) {
 					BallState[] newBalls = new BallState[balls.length-1];
 					for (int j = 0 ; j < balls.length ; j++) {
 						if (balls[i] != balls[j]) {
@@ -137,7 +141,7 @@ public class BreakoutState {
 						&& balls[i].getCenter().getX() >= paddle.getCenter().getX() - paddle.getSize().getX()/2
 						&& balls[i].getCenter().getX() <= paddle.getCenter().getX() + paddle.getSize().getX()/2) {
 					Vector newVelocity = balls[i].getVelocity().mirrorOver(new Vector(0,1));
-					//newVelocity = newVelocity.scaled(paddleDir/5);
+					newVelocity = newVelocity.plus(newVelocity.scaledDiv(5).scaled(paddleDir));
 					balls[i] = new BallState(balls[i].getCenter(), balls[i].getSize(), newVelocity);
 				}
 			}
