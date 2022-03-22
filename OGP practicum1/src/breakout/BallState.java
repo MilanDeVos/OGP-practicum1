@@ -1,4 +1,4 @@
-package breakout;
+ package breakout;
 
 /**
  * An object of this class stores a ball which has a center, a size and a velocity.

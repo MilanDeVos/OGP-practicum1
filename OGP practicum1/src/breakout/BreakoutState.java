@@ -59,7 +59,7 @@ public class BreakoutState {
 				// ball moves
 				Point nextCenter = balls[i].getCenter().plus(balls[i].getVelocity());
 				balls[i] = new BallState(nextCenter, balls[i].getSize(), balls[i].getVelocity());
-				System.out.println(balls[i].getVelocity());
+				//System.out.println(balls[i].getVelocity());
 				// ball bounces on walls
 				if (balls[i].getCenter().getX() + balls[i].getSize().getX()/2 >= getBottomRight().getX()) { // right wall
 					Vector newVelocity = balls[i].getVelocity().mirrorOver(new Vector(1,0));
@@ -78,7 +78,12 @@ public class BreakoutState {
 					BallState[] newBalls = new BallState[balls.length-1];
 					for (int j = 0 ; j < balls.length ; j++) {
 						if (balls[i] != balls[j]) {
-							newBalls[j] = balls[j];
+							if (j<i) {
+								newBalls[j] = balls[j];
+							}
+							if (j>i) {
+								newBalls[j-1] = balls[j];
+							}
 						}
 					}
 					balls = newBalls;
