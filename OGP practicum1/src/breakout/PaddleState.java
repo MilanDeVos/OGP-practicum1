@@ -8,6 +8,7 @@ package breakout;
 	 * @invar this size vector's coordinates are nonnegative.
 	 * 		| getSize().getX() >= 0 |  getSize().getY() >= 0
 	 * 
+	 * 
 	 */
 
 public class PaddleState {
