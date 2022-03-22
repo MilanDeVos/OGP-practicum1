@@ -21,6 +21,9 @@ public class BreakoutState {
 		if (blocks == null) {
 			throw new IllegalArgumentException("blocks_is_null");
 		}
+		if (bottomRight == null) {
+			throw new IllegalArgumentException("bottomRight_is_null");
+		}
 		if (bottomRight.getX() <= 0 || bottomRight.getY() <= 0) {
 			throw new IllegalArgumentException("bottomRight_is_null_or_negative");
 		}
@@ -44,8 +47,7 @@ public class BreakoutState {
 		}
 
 	public PaddleState getPaddle() {
-		PaddleState currentPaddle = new PaddleState(paddle.getCenter(), paddle.getSize()); // So paddle doesn't get leaked.
-		return currentPaddle;
+		return paddle;
 	}
 	public Point getBottomRight() {
 		return bottomRight;
@@ -57,6 +59,7 @@ public class BreakoutState {
 				// ball moves
 				Point nextCenter = balls[i].getCenter().plus(balls[i].getVelocity());
 				balls[i] = new BallState(nextCenter, balls[i].getSize(), balls[i].getVelocity());
+				System.out.println(balls[i].getVelocity());
 				// ball bounces on walls
 				if (balls[i].getCenter().getX() + balls[i].getSize().getX()/2 >= getBottomRight().getX()) { // right wall
 					Vector newVelocity = balls[i].getVelocity().mirrorOver(new Vector(1,0));
@@ -86,7 +89,7 @@ public class BreakoutState {
 				// ball bounces on block, block gets removed
 				for (int j = 0 ; j < blocks.length ; j++) {
 					if (balls[i].getCenter().getY() - balls[i].getSize().getY()/2 <= blocks[j].getCenter().getY() + blocks[j].getSize().getY()/2
-							&& balls[i].getCenter().getY() >= blocks[j].getCenter().getY() + blocks[j].getSize().getY()*(19/20)
+							&& balls[i].getCenter().getY() - balls[i].getSize().getY()/2 >= blocks[j].getCenter().getY() + blocks[j].getSize().getY()*(19/20)
 							&& balls[i].getCenter().getX() >= blocks[j].getCenter().getX() - blocks[j].getSize().getX()/2
 							&& balls[i].getCenter().getX() <= blocks[j].getCenter().getX() + blocks[j].getSize().getX()/2) { //botside
 						BlockState[] newBlocks = new BlockState[blocks.length-1];
@@ -104,6 +107,27 @@ public class BreakoutState {
 						Vector newVelocity = balls[i].getVelocity().mirrorOver(new Vector(0,1));
 						balls[i] = new BallState(balls[i].getCenter(), balls[i].getSize(), newVelocity);
 						break;
+					}
+					if (balls[i].getCenter().getY() + balls[i].getSize().getY()/2 >= blocks[j].getCenter().getY() - blocks[j].getSize().getY()/2
+							&& balls[i].getCenter().getY() + balls[i].getSize().getY()/2 <= blocks[j].getCenter().getY() + blocks[j].getSize().getY()*(19/20)
+							&& balls[i].getCenter().getX() >= blocks[j].getCenter().getX() - blocks[j].getSize().getX()/2
+							&& balls[i].getCenter().getX() <= blocks[j].getCenter().getX() + blocks[j].getSize().getX()/2 ) { //topside
+						BlockState[] newBlocks = new BlockState[blocks.length-1];
+						for (int k = 0 ; k < blocks.length ; k++) {
+							if (blocks[j] != blocks[k]) {
+								if (k<j) {
+									newBlocks[k] = blocks[k];
+								}
+							if (k>j) {
+								newBlocks[k-1] = blocks[k];
+								}
+							}
+						}
+						blocks = newBlocks;
+						Vector newVelocity = balls[i].getVelocity().mirrorOver(new Vector(0,1));
+						balls[i] = new BallState(balls[i].getCenter(), balls[i].getSize(), newVelocity);
+						break;
+					
 					}
 					else if (balls[i].getCenter().getX() - balls[i].getSize().getX()/2 <= blocks[j].getCenter().getX() + blocks[j].getSize().getX()/2
 							 && balls[i].getCenter().getX() - balls[i].getSize().getX()/2 >= blocks[j].getCenter().getX() + blocks[j].getSize().getX()*(19/20)
