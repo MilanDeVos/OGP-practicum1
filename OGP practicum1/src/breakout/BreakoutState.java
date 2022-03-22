@@ -15,6 +15,18 @@ public class BreakoutState {
 	
 	
 	public BreakoutState(BallState[] balls, BlockState[] blocks, Point bottomRight, PaddleState paddle) {
+		if (balls == null) {
+			throw new IllegalArgumentException("balls_is_null;");
+		}
+		if (blocks == null) {
+			throw new IllegalArgumentException("blocks_is_null");
+		}
+		if (bottomRight.getX() <= 0 || bottomRight.getY() <= 0) {
+			throw new IllegalArgumentException("bottomRight_is_null_or_negative");
+		}
+		if (paddle == null) {
+			throw new IllegalArgumentException("paddle_is_null");
+		}
 		this.balls = balls;
 		this.blocks = blocks;
 		this.bottomRight = bottomRight;
@@ -144,6 +156,7 @@ public class BreakoutState {
 					Vector newVelocity = balls[i].getVelocity().mirrorOver(new Vector(0,1));
 					newVelocity = newVelocity.plus(newVelocity.scaledDiv(5).scaled(paddleDir));
 					balls[i] = new BallState(balls[i].getCenter(), balls[i].getSize(), newVelocity);
+					
 				}
 			}
 		}
