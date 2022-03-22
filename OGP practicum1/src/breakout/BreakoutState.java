@@ -85,9 +85,9 @@ public class BreakoutState {
 	 * Returns variable balls
 	 * @creates | result
 	 * @pre Argument {@code balls} is not {@code null}
-	 * 	| balls != null
+	 * 	| getBalls() != null
 	 * @post result is equal to {@code balls}
-	 * 	| result == balls
+	 * 	| result == getBalls()
 	 */
 	public BallState[] getBalls() {
 		BallState[] currentBalls = balls.clone();
@@ -97,9 +97,9 @@ public class BreakoutState {
 	 * Returns variable blocks
 	 * @creates | result
 	 * @pre Argument {@code blocks} is not {@code null}
-	 * 	| blocks != null
+	 * 	| getBlocks() != null
 	 * @post result is equal to {@code blocks}
-	 * 	| result == blocks
+	 * 	| result == getBlocks()
 	 */
 	public BlockState[] getBlocks() {
 		BlockState[] currentBlocks = blocks.clone();
