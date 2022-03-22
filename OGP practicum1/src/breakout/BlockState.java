@@ -2,7 +2,7 @@ package breakout;
 
 /**
  * An object of this class stores a block which has a center point and a size vector.
- * 
+ 	 * @immutable 
 	 * @invar This center point's coordinates are nonnegative.
 	 * 		| getCenter().getX() >= 0 |  getCenter().getY() >= 0
 	 * @invar this size vector's coordinates are nonnegative.

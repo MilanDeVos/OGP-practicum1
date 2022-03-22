@@ -2,7 +2,7 @@
 
 /**
  * An object of this class stores a ball which has a center, a size and a velocity.
- * 
+ * @immutable
  * @invar This center point's coordinates are nonnegative.
  * 		| getCenter().getX() >= 0 |  getCenter().getY() >= 0
  * @invar This size vector's coordinates are nonnegative.
