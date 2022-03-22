@@ -2,10 +2,12 @@ package breakout;
 
 	/**
 	 * An object of this class stores a paddle which has a center point and a size vector.
+	 * 
 	 * @invar This center point's coordinates are nonnegative.
 	 * 		| getCenter().getX() >= 0 |  getCenter().getY() >= 0
 	 * @invar this size vector's coordinates are nonnegative.
 	 * 		| getSize().getX() >= 0 |  getSize().getY() >= 0
+	 * 
 	 */
 
 public class PaddleState {
@@ -24,8 +26,6 @@ public class PaddleState {
 	/**
 	 * Initializes this paddle with a given center and size.
 	 * 
-	 * @pre 
-	 * 
 	 * @post this paddle's center equals the given center.
 	 * 		| getCenter() == center
 	 * @post this paddle's size equals the given size.
@@ -39,11 +39,17 @@ public class PaddleState {
 		this.center = center;
 		this.size = size;
 	}
-	
+	/**
+	 * This getter returns the center point of the paddle.
+	 * @return
+	 */
 	public Point getCenter() {
 		return center;
 	}
-	
+	/**
+	 * This getter returns a vector which contains the the size of the paddle, x-value is the width, y-value is the height.
+	 * @return
+	 */
 	public Vector getSize() {
 		return size;
 	}

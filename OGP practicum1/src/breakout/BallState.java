@@ -25,7 +25,15 @@ public class BallState {
 	private final Vector velocity;
 	
 	/**
-	 * @pre 
+	 * Initializes this ball with a given center and size.
+	 * 
+	 * @post this ball's center equals the given center.
+	 * 		| getCenter() == center
+	 * @post this ball's size equals the given size.
+	 * 		| getSize() == size
+	 * @post this ball's velocity equals the given velocity.
+	 * 		| getVelocity() == velocity
+	 * 
 	 * @param center
 	 * @param size
 	 * @param velocity
@@ -36,15 +44,24 @@ public class BallState {
 		this.size = size;
 		this.velocity = velocity;
 	}
-	
+	/**
+	 * This getter returns the center point of the ball.
+	 * @return
+	 */
 	public Point getCenter() {
 		return center;
 	}
-	
+	/**
+	 * This getter returns a vector which contains the velocity of the ball.
+	 * @return
+	 */
 	public Vector getVelocity() {
 		return velocity;
 	}
-	
+	/**
+	 * This getter returns a vector which contains size of the ball, x-value is the width, y-value is the height.
+	 * @return
+	 */
 	public Vector getSize() {
 		return size;
 	}
