@@ -3,40 +3,10 @@ package breakout;
 // TODO: implement, document
 public class BreakoutState {
 	
-	/**
-	 * 
-	 * 
-	 */
-	
-	/**
-	 * @invar | balls != null
-	 * 
-	 * @representationObject
-	 */
 	private BallState[] balls;
-	/**
-	 * @invar | blocks != null
-	 * 
-	 * @representationObject
-	 */
 	private BlockState[] blocks;
-	/**
-	 * @invar | bottomRight != null
-	 * 
-	 * @representationObject
-	 */
 	private final Point bottomRight;
-	/**
-	 * @invar | paddle != null
-	 * 
-	 * @representationObject
-	 */
 	private PaddleState paddle; 
-	/**
-	 * @invar | move != null
-	 * 
-	 * @representationObject
-	 */
 	private final Vector move = new Vector(10, 0); 
 	
 	/**
@@ -50,15 +20,6 @@ public class BreakoutState {
 	 * 	| bottomRight == null
 	 * @throws IllegalArgumentException if argument {@code paddle} is {@code null}
 	 * 	| paddle == null
-	 * 
-	 * @post this object's balls equal to given balls
-	 * 	| getBalls() == balls
-	 * @post this object's blocks equal to given blocks
-	 * 	| getBlocks() == blocks
-	 * @post this object's bottomRight equal to given bottomRight
-	 * 	| getBottomRight() == bottomRight
-	 * @post this object's paddle equal to given paddle
-	 * 	| getPaddle() == paddle
 	 */
 	public BreakoutState(BallState[] balls, BlockState[] blocks, Point bottomRight, PaddleState paddle) {
 		if (balls == null) {
@@ -85,10 +46,6 @@ public class BreakoutState {
 	/**
 	 * Returns variable balls
 	 * @creates | result
-	 * @pre Argument {@code balls} is not {@code null}
-	 * 	| getBalls() != null
-	 * @post result is equal to {@code balls}
-	 * 	| result == getBalls()
 	 */
 	public BallState[] getBalls() {
 		BallState[] currentBalls = balls.clone();
@@ -97,10 +54,6 @@ public class BreakoutState {
 	/**
 	 * Returns variable blocks
 	 * @creates | result
-	 * @pre Argument {@code blocks} is not {@code null}
-	 * 	| getBlocks() != null
-	 * @post result is equal to {@code blocks}
-	 * 	| result == getBlocks()
 	 */
 	public BlockState[] getBlocks() {
 		BlockState[] currentBlocks = blocks.clone();
