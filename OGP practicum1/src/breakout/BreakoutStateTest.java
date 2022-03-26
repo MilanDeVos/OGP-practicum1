@@ -164,4 +164,14 @@ class BreakoutStateTest {
 		assertTrue(isWon.isWon());
 		assertFalse(isWon.isDead());
 	}
+	
+	@Test
+	void testPaddle() {
+		assertEquals(bos1.getPaddle().getCenter().getX(), 0);
+		bos1.movePaddleRight();
+		assertEquals(bos1.getPaddle().getCenter().getX(), 10);
+		
+		bos1.movePaddleLeft();
+		assertEquals(bos1.getPaddle().getCenter().getX(), 0);
+	}
 }
