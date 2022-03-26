@@ -18,6 +18,8 @@ class BreakoutStateTest {
 	BreakoutState bouncePaddle;
 	BreakoutState isDead;
 	BreakoutState isWon;
+	BreakoutState balls;
+	BallState[] threeBalls = {new BallState(new Point(0,0),new Vector(10,5), new Vector(5,-7)), new BallState(new Point(10000, 29980),new Vector(10,10), new Vector(0,1)), new BallState(new Point(0,0),new Vector(10,5), new Vector(5,-7))};
 	BallState[] balls1 = {new BallState(new Point(0,0),new Vector(10,5), new Vector(5,-7))};
 	BallState[] balls2 = {new BallState(new Point(10,5),new Vector(5,10), new Vector(5,7))};
 	BallState[] ballsTop = {new BallState(new Point(200000,20), new Vector(10,10), new Vector(-1,-1))};
@@ -49,7 +51,7 @@ class BreakoutStateTest {
 		bouncePaddle = new BreakoutState(ballsBouncePaddle, blocks1, new Point(50000, 30000), new PaddleState(new Point(25000, 30000), new Vector(1000,5)));
 		isDead = new BreakoutState(ballsIsDead, blocks1, new Point(50000, 30000), new PaddleState(new Point(10,10), new Vector(5,5)));
 		isWon = new BreakoutState(ballsIsWon, bounceOneBlock, new Point(30000,50000), new PaddleState(new Point(30,10),new Vector(5,10)));
-
+		balls = new BreakoutState(threeBalls, blocks1, new Point(50000, 30000), new PaddleState(new Point(30,10),new Vector(5,10)));
 	}
 	
 	@Test
@@ -166,11 +168,19 @@ class BreakoutStateTest {
 	}
 	
 	@Test
+	void testBalls() {
+		assertEquals(balls.getBalls().length, 3);
+		for(int i = 0; i < 22; ++i) {
+			balls.tick(1);
+		}
+		assertEquals(balls.getBalls().length, 2);
+	}
+	
+	@Test
 	void testPaddle() {
 		assertEquals(bos1.getPaddle().getCenter().getX(), 0);
 		bos1.movePaddleRight();
 		assertEquals(bos1.getPaddle().getCenter().getX(), 10);
-		
 		bos1.movePaddleLeft();
 		assertEquals(bos1.getPaddle().getCenter().getX(), 0);
 	}
