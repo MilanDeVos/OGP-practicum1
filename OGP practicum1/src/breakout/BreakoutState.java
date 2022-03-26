@@ -222,13 +222,21 @@ public class BreakoutState {
 		this.paddle = newPaddle;
 	}
 	
+	/**
+	 * Returns true if the game is won
+	 * @return
+	 */
 	public boolean isWon() {
 		if (blocks.length==0) {
 			return true;
 		}
 		return false;
 	}
-
+	
+	/**
+	 * returns false if the game is lost
+	 * @return
+	 */
 	public boolean isDead() {
 		if (balls.length == 0) {
 			return true;
