@@ -1,57 +1,46 @@
 package breakout;
 
-	/**
-	 * An object of this class stores a paddle which has a center point and a size vector.
-	 * @immutable
-	 * @invar This center point's coordinates are nonnegative.
-	 * 		| getCenter().getX() >= 0 |  getCenter().getY() >= 0
-	 * @invar this size vector's coordinates are nonnegative.
-	 * 		| getSize().getX() >= 0 |  getSize().getY() >= 0
-	 * 
-	 * 
-	 */
-
+/**
+ * Represents the state of a paddle in the breakout game.
+ *
+ * @immutable
+ * @invar | getCenter() != null
+ */
 public class PaddleState {
-	// TODO: implement
 	
+	public static final int HEIGHT = 500;
+	public static final int WIDTH = 3000;
 	/**
-	 * @invar This center point's coordinates are nonnegative.
-	 * 		| center.getX() >= 0 |  center.getY() >= 0
-	 * @invar this size vector's coordinates are nonnegative.
-	 * 		| size.getX() >= 0 |  size.getY() >= 0
+	 * @invar | center != null
 	 */
-	
 	private final Point center;
-	private final Vector size;
-	
+
 	/**
-	 * Initializes this paddle with a given center and size.
-	 * 
-	 * @post this paddle's center equals the given center.
-	 * 		| getCenter() == center
-	 * @post this paddle's size equals the given size.
-	 * 		| getSize() == size
-	 * 
-	 * @param center
-	 * @param size
+	 * Construct a paddle located around a given center in the field.
+	 * @pre | center != null
+	 * @post | getCenter().equals(center)
 	 */
-	
-	public PaddleState(Point center, Vector size) {
+	public PaddleState(Point center) {
 		this.center = center;
-		this.size = size;
 	}
+	
 	/**
-	 * This getter returns the center point of the paddle.
-	 * @return
+	 * Return the center point of this paddle.
 	 */
 	public Point getCenter() {
 		return center;
 	}
+
 	/**
-	 * This getter returns a vector which contains the the size of the paddle, x-value is the width, y-value is the height.
-	 * @return
+	 * Return the rectangle occupied by this paddle in the field.
+	 * 
+	 * @post | result != null
+	 * @post | result.getTopLeft().equals(getCenter().plus(new Vector(-WIDTH/2,-HEIGHT/2)))
+	 * @post | result.getBottomRight().equals(getCenter().plus(new Vector(WIDTH/2,HEIGHT/2)))
 	 */
-	public Vector getSize() {
-		return size;
+	public Rect getLocation() {
+		Vector halfDiag = new Vector(-WIDTH/2,-HEIGHT/2);
+		return new Rect(center.plus(halfDiag), center.plus(halfDiag.scaled(-1)));
 	}
+
 }

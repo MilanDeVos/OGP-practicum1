@@ -1,68 +1,67 @@
- package breakout;
+package breakout;
 
 /**
- * An object of this class stores a ball which has a center, a size and a velocity.
- * @immutable
- * @invar This center point's coordinates are nonnegative.
- * 		| getCenter().getX() >= 0 |  getCenter().getY() >= 0
- * @invar This size vector's coordinates are nonnegative.
- * 		| getSize().getX() >= 0 |  getSize().getY() >= 0
+ * Represents the state of a ball in the breakout game.
  * 
+ * @immutable
+ * @invar | getLocation() != null
+ * @invar | getVelocity() != null
  */
-
 public class BallState {
-	// TODO: implement
 	
-	/**
-	 * @invar This center point's coordinates are nonnegative.
-	 * 		| center.getX() >= 0 |  center.getY() >= 0
-	 * @invar this size vector's coordinates are nonnegative.
-	 * 		| size.getX() >= 0 |  size.getY() >= 0
-	 */
-	
-	private final Point center;
-	private final Vector size;
+	private final Circle location;
 	private final Vector velocity;
 	
 	/**
-	 * Initializes this ball with a given center and size.
+	 * Construct a new ball at a given `location`, with a given `velocity`.
 	 * 
-	 * @post this ball's center equals the given center.
-	 * 		| getCenter() == center
-	 * @post this ball's size equals the given size.
-	 * 		| getSize() == size
-	 * @post this ball's velocity equals the given velocity.
-	 * 		| getVelocity() == velocity
-	 * 
-	 * @param center
-	 * @param size
-	 * @param velocity
+	 * @pre | location != null
+	 * @pre | velocity != null
+	 * @post | getLocation() == location
+	 * @post | getVelocity().equals(velocity) 
 	 */
-	
-	public BallState(Point center, Vector size, Vector velocity ) {
-		this.center = center;
-		this.size = size;
+	public BallState(Circle location, Vector velocity) {
+		this.location = location;
 		this.velocity = velocity;
 	}
+	
 	/**
-	 * This getter returns the center point of the ball.
-	 * @return
+	 * Return this ball's location.
 	 */
-	public Point getCenter() {
-		return center;
+	public Circle getLocation() {
+		return location;
 	}
+
 	/**
-	 * This getter returns a vector which contains the velocity of the ball.
-	 * @return
+	 * Return this ball's velocity.
 	 */
 	public Vector getVelocity() {
 		return velocity;
 	}
+
 	/**
-	 * This getter returns a vector which contains size of the ball, x-value is the width, y-value is the height.
-	 * @return
+	 * Check whether this ball collides with a given `rect` and if so, return the 
+	 * new velocity this ball will have after bouncing on the given rect.
+	 * 
+	 * @pre | rect != null
+	 * @post | (rect.collideWith(getLocation()) == null && result == null) ||
+	 *       | (getVelocity().product(rect.collideWith(getLocation())) <= 0 && result == null) || 
+	 *       | (result.equals(getVelocity().mirrorOver(rect.collideWith(getLocation()))))
 	 */
-	public Vector getSize() {
-		return size;
+	public Vector bounceOn(Rect rect) {
+		Vector coldir = rect.collideWith(location);
+		if(coldir != null && velocity.product(coldir) > 0) {
+			return velocity.mirrorOver(coldir);
+		}
+		return null;
+	}
+
+	/**
+	 * Return this point's center.
+	 * 
+	 * @post | getLocation().getCenter().equals(result)
+	 */
+	public Point getCenter() {
+		return getLocation().getCenter();
 	}
 }
