@@ -11,38 +11,42 @@ public class BreakoutFacade {
 
 	public Ball createNormalBall(Point center, int diameter, Vector initBallVelocity) {
 		// TODO
-		return null;
+		return new Ball(center, diameter, initBallVelocity);
 	}
 
 	public Ball createSuperchargedBall(Point center, int diameter, Vector initBallVelocity, int lifetime) {
 		// TODO
-		return null;
+		return new Ball(center, diameter, initBallVelocity, lifetime);
 	}
 
 	public BreakoutState createBreakoutState(Ball[] balls, BlockState[] blocks, Point bottomRight,
 			PaddleState paddle) {
 		// TODO
-		return null;
+		return new BreakoutState(balls, blocks, bottomRight, paddle);
 	}
 
 	public BlockState createNormalBlockState(Point topLeft, Point bottomRight) {
 		// TODO
-		return null;
+		Rect location = new Rect(topLeft, bottomRight);
+		return new BlockState(location);
 	}
 
 	public BlockState createSturdyBlockState(Point topLeft, Point bottomRight, int i) {
 		// TODO
-		return null;
+		Rect location = new Rect(topLeft, bottomRight);
+		return new BlockState(location);
 	}
 
 	public BlockState createReplicatorBlockState(Point topLeft, Point bottomRight) {
 		// TODO
-		return null;
+		Rect location = new Rect(topLeft, bottomRight);
+		return new BlockState(location);
 	}
 
 	public BlockState createPowerupBallBlockState(Point topLeft, Point bottomRight) {
 		// TODO
-		return null;
+		Rect location = new Rect(topLeft, bottomRight);
+		return new BlockState(location);
 	}
 
 	public Color getColor(PaddleState paddle) {
@@ -57,12 +61,12 @@ public class BreakoutFacade {
 
 	public Rect getLocation(PaddleState paddle) {
 		// TODO
-		return null;
+		return paddle.getLocation();
 	}
 
 	public Point getCenter(Ball ball) {
 		// TODO
-		return null;
+		return ball.getCenter;
 	}
 
 	public int getDiameter(Ball ball) {
@@ -72,7 +76,7 @@ public class BreakoutFacade {
 
 	public Ball[] getBalls(BreakoutState breakoutState) {
 		// TODO
-		return null;
+		return breakoutState.getBalls;
 	}
 
 	public Color getColor(BlockState block) {
@@ -82,6 +86,6 @@ public class BreakoutFacade {
 
 	public Rect getLocation(BlockState block) {
 		// TODO
-		return null;
+		return block.getLocation();
 	}
 }
