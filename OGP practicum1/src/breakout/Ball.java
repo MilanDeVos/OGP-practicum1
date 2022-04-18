@@ -7,7 +7,7 @@ package breakout;
  * @invar | getLocation() != null
  * @invar | getVelocity() != null
  */
-public class BallState {
+public abstract class Ball {
 	
 	private final Circle location;
 	private final Vector velocity;
@@ -20,7 +20,7 @@ public class BallState {
 	 * @post | getLocation() == location
 	 * @post | getVelocity().equals(velocity) 
 	 */
-	public BallState(Circle location, Vector velocity) {
+	public Ball(Circle location, Vector velocity) {
 		this.location = location;
 		this.velocity = velocity;
 	}
@@ -65,3 +65,7 @@ public class BallState {
 		return getLocation().getCenter();
 	}
 }
+
+
+
+
