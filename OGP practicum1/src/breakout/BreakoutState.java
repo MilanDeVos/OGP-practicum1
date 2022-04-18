@@ -29,7 +29,7 @@ public class BreakoutState {
 	 * @invar | Arrays.stream(balls).allMatch(b -> getFieldInternal().contains(b.getLocation()))
 	 * @representationObject
 	 */
-	private BallState[] balls;	
+	private Ball[] balls;	
 	/**
 	 * @invar | blocks != null
 	 * @invar | Arrays.stream(blocks).allMatch(b -> getFieldInternal().contains(b.getLocation()))
@@ -63,7 +63,7 @@ public class BreakoutState {
 	 * @post | getBottomRight().equals(bottomRight)
 	 * @post | getPaddle().equals(paddle)
 	 */
-	public BreakoutState(BallState[] balls, BlockState[] blocks, Point bottomRight, PaddleState paddle) {
+	public BreakoutState(Ball[] balls, BlockState[] blocks, Point bottomRight, PaddleState paddle) {
 		if( balls == null) throw new IllegalArgumentException();
 		if( blocks == null) throw new IllegalArgumentException();
 		if( bottomRight == null) throw new IllegalArgumentException();
@@ -90,7 +90,7 @@ public class BreakoutState {
 	 * 
 	 * @creates result
 	 */
-	public BallState[] getBalls() {
+	public Ball[] getBalls() {
 		return balls.clone();
 	}
 
@@ -133,44 +133,44 @@ public class BreakoutState {
 		return getFieldInternal();
 	}
 
-	private BallState bounceWalls(BallState ball) {
+	private Ball bounceWalls(Ball ball) {
 		Circle loc = ball.getLocation();
 		for( Rect wall : walls) {
 			Vector nspeed = ball.bounceOn(wall);
 			if( nspeed != null ) {
-				return new BallState(loc,nspeed);
+				return new Ball(loc,nspeed);
 			}
 		}
 		return ball;
 	}
 
-	private BallState removeDead(BallState ball) {
+	private Ball removeDead(Ball ball) {
 		if( ball.getLocation().getBottommostPoint().getY() > bottomRight.getY()) { return null; }
 		else { return ball; }
 	}
 
-	private BallState clampBall(BallState b) {
+	private Ball clampBall(Ball b) {
 		Circle loc = getFieldInternal().constrain(b.getLocation());
-		return new BallState(loc,b.getVelocity());
+		return new Ball(loc,b.getVelocity());
 	}
 	
-	private BallState collideBallBlocks(BallState ball) {
+	private Ball collideBallBlocks(Ball ball) {
 		for(BlockState block : blocks) {
 			Vector nspeed = ball.bounceOn(block.getLocation());
 			if(nspeed != null) {
 				removeBlock(block);
-				return new BallState(ball.getLocation(), nspeed);
+				return new Ball(ball.getLocation(), nspeed);
 			}
 		}
 		return ball;
 	}
 
-	private BallState collideBallPaddle(BallState ball, Vector paddleVel) {
+	private Ball collideBallPaddle(Ball ball, Vector paddleVel) {
 		Vector nspeed = ball.bounceOn(paddle.getLocation());
 		if(nspeed != null) {
 			Point ncenter = ball.getLocation().getCenter().plus(nspeed);
 			nspeed = nspeed.plus(paddleVel.scaledDiv(5));
-			return new BallState(ball.getLocation().withCenter(ncenter), nspeed);
+			return new Ball(ball.getLocation().withCenter(ncenter), nspeed);
 		}
 		return ball;
 	}
@@ -240,7 +240,7 @@ public class BreakoutState {
 	private void stepBalls() {
 		for(int i = 0; i < balls.length; ++i) {
 			Point newcenter = balls[i].getLocation().getCenter().plus(balls[i].getVelocity());
-			balls[i] = new BallState(balls[i].getLocation().withCenter(newcenter),balls[i].getVelocity());
+			balls[i] = new Ball(balls[i].getLocation().withCenter(newcenter),balls[i].getVelocity());
 		}
 	}
 
