@@ -1,5 +1,7 @@
 package breakout;
 
+import java.awt.Color;
+
 /**
  * Represents the state of a ball in the breakout game.
  * 
@@ -9,35 +11,15 @@ package breakout;
  */
 public abstract class Ball {
 	
-	private final Circle location;
-	private final Vector velocity;
-	
-	/**
-	 * Construct a new ball at a given `location`, with a given `velocity`.
-	 * 
-	 * @pre | location != null
-	 * @pre | velocity != null
-	 * @post | getLocation() == location
-	 * @post | getVelocity().equals(velocity) 
-	 */
-	public Ball(Circle location, Vector velocity) {
-		this.location = location;
-		this.velocity = velocity;
-	}
-	
 	/**
 	 * Return this ball's location.
 	 */
-	public Circle getLocation() {
-		return location;
-	}
+	public abstract Circle getLocation();
 
 	/**
 	 * Return this ball's velocity.
 	 */
-	public Vector getVelocity() {
-		return velocity;
-	}
+	public abstract Vector getVelocity();
 
 	/**
 	 * Check whether this ball collides with a given `rect` and if so, return the 
@@ -48,22 +30,18 @@ public abstract class Ball {
 	 *       | (getVelocity().product(rect.collideWith(getLocation())) <= 0 && result == null) || 
 	 *       | (result.equals(getVelocity().mirrorOver(rect.collideWith(getLocation()))))
 	 */
-	public Vector bounceOn(Rect rect) {
-		Vector coldir = rect.collideWith(location);
-		if(coldir != null && velocity.product(coldir) > 0) {
-			return velocity.mirrorOver(coldir);
-		}
-		return null;
-	}
+	public abstract Vector bounceOn(Rect rect);
 
 	/**
 	 * Return this point's center.
 	 * 
 	 * @post | getLocation().getCenter().equals(result)
 	 */
-	public Point getCenter() {
-		return getLocation().getCenter();
-	}
+	public abstract Point getCenter();
+	
+	public abstract int getLifetime();
+	
+	public abstract Color getColor();
 }
 
 

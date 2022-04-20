@@ -11,12 +11,14 @@ public class BreakoutFacade {
 
 	public Ball createNormalBall(Point center, int diameter, Vector initBallVelocity) {
 		// TODO
-		return new Ball(center, diameter, initBallVelocity);
+		var circle = new Circle(center, diameter);
+		return new NormalBall(circle, initBallVelocity);
 	}
 
 	public Ball createSuperchargedBall(Point center, int diameter, Vector initBallVelocity, int lifetime) {
 		// TODO
-		return new Ball(center, diameter, initBallVelocity, lifetime);
+		var circle = new Circle(center, diameter);
+		return new SuperchargedBall(circle, initBallVelocity, lifetime);
 	}
 
 	public BreakoutState createBreakoutState(Ball[] balls, BlockState[] blocks, Point bottomRight,
@@ -56,7 +58,7 @@ public class BreakoutFacade {
 
 	public Color getColor(Ball ball) {
 		// TODO
-		return null;
+		return ball.getColor();
 	}
 
 	public Rect getLocation(PaddleState paddle) {
@@ -66,22 +68,22 @@ public class BreakoutFacade {
 
 	public Point getCenter(Ball ball) {
 		// TODO
-		return ball.getCenter;
+		return ball.getCenter();
 	}
 
 	public int getDiameter(Ball ball) {
 		// TODO
-		return -1;
+		return ball.getLocation().getDiameter();
 	}
 
 	public Ball[] getBalls(BreakoutState breakoutState) {
 		// TODO
-		return breakoutState.getBalls;
+		return breakoutState.getBalls();
 	}
 
 	public Color getColor(BlockState block) {
 		// TODO
-		return null;
+		return block.getColor();
 	}
 
 	public Rect getLocation(BlockState block) {

@@ -1,5 +1,7 @@
 package breakout;
 
+import java.awt.Color;
+
 /**
  * Represents the state of a block in the breakout game.
  *
@@ -12,7 +14,8 @@ public class BlockState {
 	 * @invar | location != null
 	 */
 	private final Rect location;
-
+	private final static Color color = Color.BLUE;
+	
 	/**
 	 * Construct a block occupying a given rectangle in the field.
 	 * @pre | location != null
@@ -27,6 +30,10 @@ public class BlockState {
 	 */
 	public Rect getLocation() {
 		return location;
+	}
+	
+	public Color getColor() {
+		return color;
 	}
 	
 }

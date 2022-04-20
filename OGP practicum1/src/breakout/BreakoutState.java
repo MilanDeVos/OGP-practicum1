@@ -46,7 +46,8 @@ public class BreakoutState {
 	private final Rect rightWall;
 	private final Rect leftWall;
 	private final Rect[] walls;
-
+	
+	public final static int MAX_ELAPSED_TIME = 50;
 	/**
 	 * Construct a new BreakoutState with the given balls, blocks, paddle.
 	 * 
@@ -84,7 +85,7 @@ public class BreakoutState {
 		this.leftWall = new Rect( new Point(-1000,0), new Point(0,bottomRight.getY()));
 		this.walls = new Rect[] {topWall,rightWall, leftWall };
 	}
-
+	
 	/**
 	 * Return the balls of this BreakoutState.
 	 * 
@@ -138,7 +139,7 @@ public class BreakoutState {
 		for( Rect wall : walls) {
 			Vector nspeed = ball.bounceOn(wall);
 			if( nspeed != null ) {
-				return new Ball(loc,nspeed);
+				return new NormalBall(loc,nspeed);
 			}
 		}
 		return ball;
@@ -151,7 +152,7 @@ public class BreakoutState {
 
 	private Ball clampBall(Ball b) {
 		Circle loc = getFieldInternal().constrain(b.getLocation());
-		return new Ball(loc,b.getVelocity());
+		return new NormalBall(loc,b.getVelocity());
 	}
 	
 	private Ball collideBallBlocks(Ball ball) {
@@ -159,7 +160,7 @@ public class BreakoutState {
 			Vector nspeed = ball.bounceOn(block.getLocation());
 			if(nspeed != null) {
 				removeBlock(block);
-				return new Ball(ball.getLocation(), nspeed);
+				return new NormalBall(ball.getLocation(), nspeed);
 			}
 		}
 		return ball;
@@ -170,7 +171,7 @@ public class BreakoutState {
 		if(nspeed != null) {
 			Point ncenter = ball.getLocation().getCenter().plus(nspeed);
 			nspeed = nspeed.plus(paddleVel.scaledDiv(5));
-			return new Ball(ball.getLocation().withCenter(ncenter), nspeed);
+			return new NormalBall(ball.getLocation().withCenter(ncenter), nspeed);
 		}
 		return ball;
 	}
@@ -190,14 +191,14 @@ public class BreakoutState {
 	 * 
 	 * @mutates this
 	 */
-	public void tick(int paddleDir) {
-		stepBalls();
+	public void tick(int paddleDir, int elapsedTime) {
+		stepBalls(elapsedTime);
 		bounceBallsOnWalls();
 		removeDeadBalls();
 		bounceBallsOnBlocks();
 		bounceBallsOnPaddle(paddleDir);
 		clampBalls();
-		balls = Arrays.stream(balls).filter(x -> x != null).toArray(BallState[]::new);
+		balls = Arrays.stream(balls).filter(x -> x != null).toArray(Ball[]::new);
 	}
 
 	private void clampBalls() {
@@ -237,10 +238,10 @@ public class BreakoutState {
 		}
 	}
 
-	private void stepBalls() {
+	private void stepBalls(int elapsedTime) {
 		for(int i = 0; i < balls.length; ++i) {
-			Point newcenter = balls[i].getLocation().getCenter().plus(balls[i].getVelocity());
-			balls[i] = new Ball(balls[i].getLocation().withCenter(newcenter),balls[i].getVelocity());
+			Point newcenter = balls[i].getLocation().getCenter().plus(balls[i].getVelocity().scaled(elapsedTime));
+			balls[i] = new NormalBall(balls[i].getLocation().withCenter(newcenter),balls[i].getVelocity());
 		}
 	}
 
@@ -249,8 +250,8 @@ public class BreakoutState {
 	 * 
 	 * @mutates this
 	 */
-	public void movePaddleRight() {
-		Point ncenter = paddle.getCenter().plus(PADDLE_VEL);
+	public void movePaddleRight(int elapsedTime) {
+		Point ncenter = paddle.getCenter().plus(PADDLE_VEL.scaled(elapsedTime));
 		paddle = new PaddleState(getField().minusMargin(PaddleState.WIDTH/2,0).constrain(ncenter));
 	}
 
@@ -259,8 +260,8 @@ public class BreakoutState {
 	 * 
 	 * @mutates this
 	 */
-	public void movePaddleLeft() {
-		Point ncenter = paddle.getCenter().plus(PADDLE_VEL.scaled(-1));
+	public void movePaddleLeft(int elapsedTime) {
+		Point ncenter = paddle.getCenter().plus(PADDLE_VEL.scaled(-1*elapsedTime));
 		paddle = new PaddleState(getField().minusMargin(PaddleState.WIDTH/2,0).constrain(ncenter));
 	}
 
