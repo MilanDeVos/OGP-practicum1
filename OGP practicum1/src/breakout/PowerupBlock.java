@@ -13,8 +13,9 @@ public class PowerupBlock extends BlockState {
 	/**
 	 * @invar | location != null
 	 */
-	private final Rect location;
-	private final static Color color = Color.MAGENTA;
+	public final Rect location;
+	public final static Color color = Color.MAGENTA;
+	public final static int health = -1;
 	
 	/**
 	 * Construct a block occupying a given rectangle in the field.
@@ -50,5 +51,9 @@ public class PowerupBlock extends BlockState {
 	
 	public boolean isReplication() {
 		return false;
+	}
+	
+	public int getHealth() {
+		return health;
 	}
 }

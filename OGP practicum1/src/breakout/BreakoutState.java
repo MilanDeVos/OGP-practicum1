@@ -156,11 +156,32 @@ public class BreakoutState {
 	}
 	
 	private Ball collideBallBlocks(Ball ball) {
-		for(BlockState block : blocks) {
-			Vector nspeed = ball.bounceOn(block.getLocation());
+		for(int i=0; i < blocks.length; i++) {
+			Vector nspeed = ball.bounceOn(blocks[i].getLocation());
 			if(nspeed != null) {
-				removeBlock(block);
-				return new NormalBall(ball.getLocation(), nspeed);
+				if (blocks[i].isNormal()) {
+					removeBlock(blocks[i]);
+					return new NormalBall(ball.getLocation(), nspeed);
+				}
+				if (blocks[i].isSturdy()) {
+					Rect location = blocks[i].getLocation();
+					int health = blocks[i].getHealth();
+					if (health <= 1) {
+						removeBlock(blocks[i]);
+					} 
+					else {
+						blocks[i] = new SturdyBlock(location, health-1);
+					}
+					return new NormalBall(ball.getLocation(), nspeed);
+					
+				}
+				if (blocks[i].isPowerup()) {
+					removeBlock(blocks[i]);
+					return new SuperchargedBall(ball.getLocation(), nspeed, 10);
+				}
+				if (blocks[i].isReplication()) {
+					
+				}
 			}
 		}
 		return ball;

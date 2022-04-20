@@ -35,7 +35,7 @@ public class BreakoutFacade {
 	public BlockState createSturdyBlockState(Point topLeft, Point bottomRight, int i) {
 		// TODO
 		Rect location = new Rect(topLeft, bottomRight);
-		return new SturdyBlock(location);
+		return new SturdyBlock(location, i);
 	}
 
 	public BlockState createReplicatorBlockState(Point topLeft, Point bottomRight) {

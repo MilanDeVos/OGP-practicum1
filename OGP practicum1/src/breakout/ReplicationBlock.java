@@ -13,8 +13,9 @@ public class ReplicationBlock extends BlockState {
 	/**
 	 * @invar | location != null
 	 */
-	private final Rect location;
-	private final static Color color = Color.RED;
+	public final Rect location;
+	public final static Color color = Color.RED;
+	public final static int health = -1;
 	
 	/**
 	 * Construct a block occupying a given rectangle in the field.
@@ -50,5 +51,9 @@ public class ReplicationBlock extends BlockState {
 	
 	public boolean isReplication() {
 		return true;
+	}
+	
+	public int getHealth() {
+		return health;
 	}
 }

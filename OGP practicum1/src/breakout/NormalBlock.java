@@ -15,6 +15,7 @@ public class NormalBlock extends BlockState {
 	 */
 	private final Rect location;
 	private final static Color color = Color.BLUE;
+	public final static int health = -1;
 	
 	/**
 	 * Construct a block occupying a given rectangle in the field.
@@ -50,5 +51,9 @@ public class NormalBlock extends BlockState {
 	
 	public boolean isReplication() {
 		return false;
+	}
+	
+	public int getHealth() {
+		return health;
 	}
 }

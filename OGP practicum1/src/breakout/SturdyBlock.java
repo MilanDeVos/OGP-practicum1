@@ -13,16 +13,18 @@ public class SturdyBlock extends BlockState {
 	/**
 	 * @invar | location != null
 	 */
-	private final Rect location;
-	private final static Color color = Color.ORANGE;
+	public final Rect location;
+	public final static Color color = Color.ORANGE;
+	public final int health;
 	
 	/**
 	 * Construct a block occupying a given rectangle in the field.
 	 * @pre | location != null
 	 * @post | getLocation().equals(location)
 	 */
-	public SturdyBlock(Rect location) {
+	public SturdyBlock(Rect location, int health) {
 		this.location = location;
+		this.health = health;
 	}
 
 	/**
@@ -50,5 +52,9 @@ public class SturdyBlock extends BlockState {
 	
 	public boolean isReplication() {
 		return false;
+	}
+	
+	public int getHealth() {
+		return health;
 	}
 }

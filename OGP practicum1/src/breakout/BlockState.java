@@ -24,4 +24,6 @@ public abstract class BlockState {
 	public abstract boolean isPowerup();
 	
 	public abstract boolean isReplication();
+	
+	public abstract int getHealth();
 }
