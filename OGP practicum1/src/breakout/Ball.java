@@ -42,6 +42,11 @@ public abstract class Ball {
 	public abstract int getLifetime();
 	
 	public abstract Color getColor();
+	
+	public abstract boolean isNormal();
+	
+	public abstract boolean isSupercharged();
+	
 }
 
 

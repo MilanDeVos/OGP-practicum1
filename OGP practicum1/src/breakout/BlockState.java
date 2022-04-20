@@ -8,32 +8,20 @@ import java.awt.Color;
  * @immutable
  * @invar | getLocation() != null
  */
-public class BlockState {
+public abstract class BlockState {
 	
-	/**
-	 * @invar | location != null
-	 */
-	private final Rect location;
-	private final static Color color = Color.BLUE;
-	
-	/**
-	 * Construct a block occupying a given rectangle in the field.
-	 * @pre | location != null
-	 * @post | getLocation().equals(location)
-	 */
-	public BlockState(Rect location) {
-		this.location = location;
-	}
-
 	/**
 	 * Return the rectangle occupied by this block in the field.
 	 */
-	public Rect getLocation() {
-		return location;
-	}
+	public abstract Rect getLocation();
 	
-	public Color getColor() {
-		return color;
-	}
+	public abstract Color getColor();
 	
+	public abstract boolean isNormal();
+	
+	public abstract boolean isSturdy();
+	
+	public abstract boolean isPowerup();
+	
+	public abstract boolean isReplication();
 }

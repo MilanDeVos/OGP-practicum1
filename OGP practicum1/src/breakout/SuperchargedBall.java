@@ -63,4 +63,12 @@ public class SuperchargedBall extends Ball {
 	public Color getColor() {
 		return color;
 	}
+	
+	public boolean isNormal() {
+		return false;
+	}
+	
+	public boolean isSupercharged() {
+		return true;
+	}
 }

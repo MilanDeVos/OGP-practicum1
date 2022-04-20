@@ -30,30 +30,29 @@ public class BreakoutFacade {
 	public BlockState createNormalBlockState(Point topLeft, Point bottomRight) {
 		// TODO
 		Rect location = new Rect(topLeft, bottomRight);
-		return new BlockState(location);
+		return new NormalBlock(location);
 	}
-
 	public BlockState createSturdyBlockState(Point topLeft, Point bottomRight, int i) {
 		// TODO
 		Rect location = new Rect(topLeft, bottomRight);
-		return new BlockState(location);
+		return new SturdyBlock(location);
 	}
 
 	public BlockState createReplicatorBlockState(Point topLeft, Point bottomRight) {
 		// TODO
 		Rect location = new Rect(topLeft, bottomRight);
-		return new BlockState(location);
+		return new ReplicationBlock(location);
 	}
 
 	public BlockState createPowerupBallBlockState(Point topLeft, Point bottomRight) {
 		// TODO
 		Rect location = new Rect(topLeft, bottomRight);
-		return new BlockState(location);
+		return new PowerupBlock(location);
 	}
 
 	public Color getColor(PaddleState paddle) {
 		// TODO
-		return null;
+		return paddle.getColor();
 	}
 
 	public Color getColor(Ball ball) {
