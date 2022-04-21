@@ -165,7 +165,9 @@ public class BreakoutState {
 			if(nspeed != null) {
 				if (blocks[i].isNormal()) {
 					removeBlock(blocks[i]);
-					ball.setVelocity(nspeed);
+					if (ball.isNormal()) {
+						ball.setVelocity(nspeed);
+					}
 					return ball;
 					//return new NormalBall(ball.getLocation(), nspeed, 1);
 				}
@@ -174,6 +176,9 @@ public class BreakoutState {
 					int health = blocks[i].getHealth();
 					if (health <= 1) {
 						removeBlock(blocks[i]);
+						if (ball.isSupercharged()) {
+							return ball;
+						}
 					} 
 					else {
 						blocks[i] = new SturdyBlock(location, health-1);
@@ -185,7 +190,10 @@ public class BreakoutState {
 				}
 				if (blocks[i].isPowerup()) {
 					removeBlock(blocks[i]);
-					return new SuperchargedBall(ball.getLocation(), nspeed, 333);
+					if (ball.isNormal()) {
+						return new SuperchargedBall(ball.getLocation(), nspeed, 333);
+					}
+					return new SuperchargedBall(ball.getLocation(), ball.getVelocity(), 333);
 				}
 				if (blocks[i].isReplicator()) {
 					
