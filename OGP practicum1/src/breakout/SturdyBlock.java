@@ -50,7 +50,7 @@ public class SturdyBlock extends BlockState {
 		return false;
 	}
 	
-	public boolean isReplication() {
+	public boolean isReplicator() {
 		return false;
 	}
 	

@@ -43,6 +43,14 @@ public abstract class Ball {
 	
 	public abstract Color getColor();
 	
+	public abstract void setLifetime(int newLifetime);
+	
+	public abstract void setCenter(Point newCenter);
+	
+	public abstract void setLocation(Circle newLocation);
+	
+	public abstract void setVelocity(Vector newVelocity);
+	
 	public abstract boolean isNormal();
 	
 	public abstract boolean isSupercharged();

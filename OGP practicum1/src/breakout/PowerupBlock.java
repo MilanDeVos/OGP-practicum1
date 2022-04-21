@@ -49,7 +49,7 @@ public class PowerupBlock extends BlockState {
 		return true;
 	}
 	
-	public boolean isReplication() {
+	public boolean isReplicator() {
 		return false;
 	}
 	

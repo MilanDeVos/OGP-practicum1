@@ -6,12 +6,13 @@ public class NormalBall extends Ball {
 	
 	private Circle location;
 	private Vector velocity;
-	private final static int lifetime = 0;
+	private int lifetime;
 	private final static Color color = Color.green;
 	
-	public NormalBall(Circle location, Vector velocity) {
+	public NormalBall(Circle location, Vector velocity, int lifetime) {
 		this.location = location;
 		this.velocity = velocity;
+		this.lifetime = lifetime;
 	}
 	
 	/**
@@ -62,6 +63,22 @@ public class NormalBall extends Ball {
 		return color;
 	}
 	
+	public void setLifetime(int newLifetime) {
+		this.lifetime = newLifetime;
+	}
+	
+	public void setCenter(Point newCenter) {
+		this.location = new Circle(newCenter, 700);
+	}
+	
+	public void setLocation(Circle newLocation) {
+		this.location = newLocation;
+	}
+	
+	public void setVelocity(Vector newVelocity) {
+		this.velocity = newVelocity;
+	}
+	
 	public boolean isNormal() {
 		return true;
 	}
@@ -69,4 +86,6 @@ public class NormalBall extends Ball {
 	public boolean isSupercharged() {
 		return false;
 	}
+
+
 }

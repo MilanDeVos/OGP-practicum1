@@ -12,7 +12,7 @@ public class BreakoutFacade {
 	public Ball createNormalBall(Point center, int diameter, Vector initBallVelocity) {
 		// TODO
 		var circle = new Circle(center, diameter);
-		return new NormalBall(circle, initBallVelocity);
+		return new NormalBall(circle, initBallVelocity, 0);
 	}
 
 	public Ball createSuperchargedBall(Point center, int diameter, Vector initBallVelocity, int lifetime) {
@@ -41,7 +41,7 @@ public class BreakoutFacade {
 	public BlockState createReplicatorBlockState(Point topLeft, Point bottomRight) {
 		// TODO
 		Rect location = new Rect(topLeft, bottomRight);
-		return new ReplicationBlock(location);
+		return new ReplicatorBlock(location);
 	}
 
 	public BlockState createPowerupBallBlockState(Point topLeft, Point bottomRight) {

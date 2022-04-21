@@ -8,7 +8,7 @@ import java.awt.Color;
  * @immutable
  * @invar | getLocation() != null
  */
-public class ReplicationBlock extends BlockState {
+public class ReplicatorBlock extends BlockState {
 	
 	/**
 	 * @invar | location != null
@@ -22,7 +22,7 @@ public class ReplicationBlock extends BlockState {
 	 * @pre | location != null
 	 * @post | getLocation().equals(location)
 	 */
-	public ReplicationBlock(Rect location) {
+	public ReplicatorBlock(Rect location) {
 		this.location = location;
 	}
 
@@ -49,7 +49,7 @@ public class ReplicationBlock extends BlockState {
 		return false;
 	}
 	
-	public boolean isReplication() {
+	public boolean isReplicator() {
 		return true;
 	}
 	

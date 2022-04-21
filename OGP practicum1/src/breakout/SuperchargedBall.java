@@ -6,8 +6,8 @@ public class SuperchargedBall extends Ball {
 
 	private Circle location;
 	private Vector velocity;
-	private int lifetime;
-	private final static Color color = Color.magenta;
+	public int lifetime;
+	private final static Color color = Color.MAGENTA;
 	
 	public SuperchargedBall(Circle location, Vector velocity, int lifetime) {
 		this.location = location;
@@ -64,6 +64,22 @@ public class SuperchargedBall extends Ball {
 		return color;
 	}
 	
+	public void setLifetime(int newLifetime) {
+		this.lifetime = newLifetime;
+	}
+	
+	public void setCenter(Point newCenter) {
+		this.location = new Circle(newCenter, 700);
+	}
+	
+	public void setLocation(Circle newLocation) {
+		this.location = newLocation;
+	}
+	
+	public void setVelocity(Vector newVelocity) {
+		this.velocity = newVelocity;
+	}
+	
 	public boolean isNormal() {
 		return false;
 	}
@@ -71,4 +87,5 @@ public class SuperchargedBall extends Ball {
 	public boolean isSupercharged() {
 		return true;
 	}
+
 }
