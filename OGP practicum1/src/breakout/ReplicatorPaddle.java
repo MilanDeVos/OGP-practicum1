@@ -13,20 +13,22 @@ public class ReplicatorPaddle extends PaddleState {
 	
 	public static final int HEIGHT = 500;
 	public static final int WIDTH = 3000;
-	private final static Color color = Color.RED;
+	private final static Color color = Color.BLUE;
+	private int health;
 	
 	/**
 	 * @invar | center != null
 	 */
-	private final Point center;
+	private Point center;
 	
 	/**
 	 * Construct a paddle located around a given center in the field.
 	 * @pre | center != null
 	 * @post | getCenter().equals(center)
 	 */
-	public ReplicatorPaddle(Point center) {
+	public ReplicatorPaddle(Point center, int health) {
 		this.center = center;
+		this.health = health;
 	}
 	
 	/**
@@ -50,6 +52,26 @@ public class ReplicatorPaddle extends PaddleState {
 	
 	public Color getColor() {
 		return color;
+	}
+	
+	public  int getHealth() {
+		return health;
+	}
+	
+	public  void setCenter(Point newCenter) {
+		this.center = newCenter;
+	}
+	
+	public  void setHealth(int newHealth) {
+		this.health = newHealth;
+	}
+	
+	public  boolean isNormal() {
+		return false;
+	}
+	
+	public  boolean isReplicator() {
+		return true;
 	}
 	
 }

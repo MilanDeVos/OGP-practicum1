@@ -9,7 +9,7 @@ public class GameMap {
 	private static final int WIDTH = 50000;
 	private static int BLOCK_LINES = 8;
 	private static int BLOCK_COLUMNS = 10;
-	private static final Vector INIT_BALL_VELOCITY = new Vector(4,5); //(4,5)
+	private static final Vector INIT_BALL_VELOCITY = new Vector(0,10); //(4,5)
 	private static BreakoutFacade facade = new BreakoutFacade();
 
 	private GameMap() {
@@ -38,7 +38,7 @@ public class GameMap {
 	private static PaddleState createPaddle(Point bottomLeft) {
 		Vector size = new Vector(WIDTH / BLOCK_COLUMNS / 2, HEIGHT / BLOCK_LINES / 2);
 		Point center = bottomLeft.plus(size);
-		return facade.createNormalPaddleState(center);
+		return facade.createNormalPaddleState(center, 0);
 	}
 
 	private static Ball createBall(Point bottomLeft) {

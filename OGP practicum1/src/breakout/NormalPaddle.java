@@ -14,19 +14,21 @@ public class NormalPaddle extends PaddleState {
 	public static final int HEIGHT = 500;
 	public static final int WIDTH = 3000;
 	private final static Color color = Color.RED;
+	private int health;
 	
 	/**
 	 * @invar | center != null
 	 */
-	private final Point center;
+	private Point center;
 	
 	/**
 	 * Construct a paddle located around a given center in the field.
 	 * @pre | center != null
 	 * @post | getCenter().equals(center)
 	 */
-	public NormalPaddle(Point center) {
+	public NormalPaddle(Point center, int health) {
 		this.center = center;
+		this.health = health;
 	}
 	
 	/**
@@ -50,6 +52,26 @@ public class NormalPaddle extends PaddleState {
 	
 	public Color getColor() {
 		return color;
+	}
+	
+	public  int getHealth() {
+		return health;
+	}
+	
+	public  void setCenter(Point newCenter) {
+		this.center = newCenter;
+	}
+	
+	public  void setHealth(int newHealth) {
+		this.health = newHealth;
+	}
+	
+	public  boolean isNormal() {
+		return true;
+	}
+	
+	public  boolean isReplicator() {
+		return false;
 	}
 	
 }

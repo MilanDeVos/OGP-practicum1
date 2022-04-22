@@ -15,5 +15,15 @@ public abstract class PaddleState {
 	public abstract Rect getLocation();
 	
 	public abstract Color getColor();
+	
+	public abstract int getHealth();
+	
+	public abstract void setCenter(Point newCenter);
+	
+	public abstract void setHealth(int newHealth);
+	
+	public abstract boolean isNormal();
+	
+	public abstract boolean isReplicator();
 
 }
