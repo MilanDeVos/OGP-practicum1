@@ -8,46 +8,12 @@ import java.awt.Color;
  * @immutable
  * @invar | getCenter() != null
  */
-public class PaddleState {
+public abstract class PaddleState {
 	
-	public static final int HEIGHT = 500;
-	public static final int WIDTH = 3000;
-	private final static Color color = Color.RED;
-	/**
-	 * @invar | center != null
-	 */
-	private final Point center;
+	public abstract Point getCenter();
 
-	/**
-	 * Construct a paddle located around a given center in the field.
-	 * @pre | center != null
-	 * @post | getCenter().equals(center)
-	 */
-	public PaddleState(Point center) {
-		this.center = center;
-	}
+	public abstract Rect getLocation();
 	
-	/**
-	 * Return the center point of this paddle.
-	 */
-	public Point getCenter() {
-		return center;
-	}
-
-	/**
-	 * Return the rectangle occupied by this paddle in the field.
-	 * 
-	 * @post | result != null
-	 * @post | result.getTopLeft().equals(getCenter().plus(new Vector(-WIDTH/2,-HEIGHT/2)))
-	 * @post | result.getBottomRight().equals(getCenter().plus(new Vector(WIDTH/2,HEIGHT/2)))
-	 */
-	public Rect getLocation() {
-		Vector halfDiag = new Vector(-WIDTH/2,-HEIGHT/2);
-		return new Rect(center.plus(halfDiag), center.plus(halfDiag.scaled(-1)));
-	}
-	
-	public Color getColor() {
-		return color;
-	}
+	public abstract Color getColor();
 
 }
