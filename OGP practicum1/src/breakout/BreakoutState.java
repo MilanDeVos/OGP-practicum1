@@ -214,12 +214,32 @@ public class BreakoutState {
 			//return new NormalBall(ball.getLocation().withCenter(ncenter), nspeed, 1);
 			ball.setVelocity(nspeed);
 			if(paddle.getHealth() > 0) {
+				int ballAmount = 0;
+				Ball[] extraBalls = {new NormalBall(ball.getLocation(), ball.getVelocity().plus(new Vector(2,2)), 0), new NormalBall(ball.getLocation(),ball.getVelocity().plus(new Vector(-2,2)), 0), new NormalBall(ball.getLocation(), ball.getVelocity().plus(new Vector(2,-2)), 0)};
+				if(paddle.getHealth() == 3) {
+					ballAmount = balls.length + 3;
+				}
+				if(paddle.getHealth() == 2) {
+					ballAmount = balls.length + 2;
+				}
+				if(paddle.getHealth() == 1) {
+					ballAmount = balls.length + 1;
+				}
+				Ball[] newBalls = new Ball[ballAmount];
+				for (int i = 0; i < ballAmount; i++) {
+					if (i < balls.length) {
+						newBalls[i] = balls[i];
+					}
+					else
+						newBalls[i] = extraBalls[i-balls.length];
+				}
 				System.out.print(paddle.getHealth());
 				int newHealth = paddle.getHealth()-1;
 				paddle.setHealth(newHealth);
 				if(paddle.getHealth() <= 0) {
 					paddle = new NormalPaddle(paddle.getCenter(), 0);
 				}
+				balls = newBalls;
 			}
 			return ball;
 		}
