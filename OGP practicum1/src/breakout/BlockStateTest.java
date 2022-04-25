@@ -13,19 +13,17 @@ class BlockStateTest {
 	
 	@BeforeEach
 	void setUp() throws Exception {
-		block1 = new BlockState(new Point(0,0),new Vector(10,5));
-		block2 = new BlockState(new Point(1,2),new Vector(10,10));
-		block3 = new BlockState(new Point(20,5),new Vector(5,10));
+		block1 = new NormalBlock(new Rect(new Point(5,5), new Point(15,15)));
+		block2 = new NormalBlock(new Rect(new Point(5,5), new Point(15,15)));
+		block3 = new NormalBlock(new Rect(new Point(5,5), new Point(15,15)));
 	}
 	
 	@Test
-	void testBallState() {
-		assertEquals(new Point(0,0), block1.getCenter());
-		assertEquals(new Point(1,2), block2.getCenter());
-		assertEquals(new Point(20,5), block3.getCenter());
-		assertEquals(new Vector(10,5), block1.getSize());
-		assertEquals(new Vector(10,10), block2.getSize());
-		assertEquals(new Vector(5,10), block3.getSize());
+	void testBallS() {
+		assertEquals(new Rect(new Point(5,5), new Point(15,15)), block1.getLocation());
+		assertEquals(new Rect(new Point(5,5), new Point(15,15)), block2.getLocation());
+		assertEquals(new Rect(new Point(5,5), new Point(15,15)), block3.getLocation());
+		
 	}
 	@Test
 	void testEqualsObject() {
