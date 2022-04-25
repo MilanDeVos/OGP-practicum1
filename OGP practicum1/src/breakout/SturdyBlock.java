@@ -14,7 +14,7 @@ public class SturdyBlock extends BlockState {
 	 * @invar | location != null
 	 */
 	public final Rect location;
-	public final static Color color = Color.ORANGE;
+	public Color color;
 	public final int health;
 	
 	/**
@@ -25,6 +25,15 @@ public class SturdyBlock extends BlockState {
 	public SturdyBlock(Rect location, int health) {
 		this.location = location;
 		this.health = health;
+		if (health == 3) {
+			color = Color.ORANGE;
+		}
+		if (health == 2) {
+			color = Color.YELLOW;
+		}
+		if (health == 1) {
+			color = Color.gray;
+		}
 	}
 
 	/**

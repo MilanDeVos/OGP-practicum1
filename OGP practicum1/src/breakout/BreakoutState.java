@@ -233,7 +233,6 @@ public class BreakoutState {
 					else
 						newBalls[i] = extraBalls[i-balls.length];
 				}
-				System.out.print(paddle.getHealth());
 				int newHealth = paddle.getHealth()-1;
 				paddle.setHealth(newHealth);
 				if(paddle.getHealth() <= 0) {
