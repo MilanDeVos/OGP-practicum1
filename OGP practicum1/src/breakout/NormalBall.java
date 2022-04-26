@@ -2,6 +2,13 @@ package breakout;
 
 import java.awt.Color;
 
+/**
+ * Represents the state of a normal ball in the breakout game.
+ * 
+ * @immutable
+ * @invar | getLocation() != null
+ * @invar | getVelocity() != null
+ */
 public class NormalBall extends Ball {
 	
 	private Circle location;
@@ -55,26 +62,44 @@ public class NormalBall extends Ball {
 		return getLocation().getCenter();
 	}
 	
+	/**
+	 * Return this ball's lifetime.
+	 */
 	public int getLifetime() {
 		return lifetime;
 	}
 	
+	/**
+	 * Return this ball's color.
+	 */
 	public Color getColor() {
 		return color;
 	}
 	
+	/**
+	 * sets this ball's lifetime to the given value.
+	 */
 	public void setLifetime(int newLifetime) {
 		this.lifetime = newLifetime;
 	}
 	
+	/**
+	 * sets this ball's center to the given value.
+	 */
 	public void setCenter(Point newCenter) {
 		this.location = new Circle(newCenter, 700);
 	}
 	
+	/**
+	 * sets this ball's location to the given value.
+	 */
 	public void setLocation(Circle newLocation) {
 		this.location = newLocation;
 	}
 	
+	/**
+	 * sets this ball's velocity to the given value.
+	 */
 	public void setVelocity(Vector newVelocity) {
 		this.velocity = newVelocity;
 	}

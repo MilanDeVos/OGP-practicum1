@@ -3,12 +3,11 @@ package breakout;
 import java.awt.Color;
 
 /**
- * Represents the state of a paddle in the breakout game.
+ * Represents the state of a replicator paddle in the breakout game.
  *
  * @immutable
  * @invar | getCenter() != null
  */
-
 public class ReplicatorPaddle extends PaddleState {
 	
 	public static final int HEIGHT = 500;
@@ -50,18 +49,30 @@ public class ReplicatorPaddle extends PaddleState {
 		return new Rect(center.plus(halfDiag), center.plus(halfDiag.scaled(-1)));
 	}
 	
+	/**
+	 * Returns this paddle's color.
+	 */
 	public Color getColor() {
 		return color;
 	}
 	
+	/**
+	 * Returns this paddle's health.
+	 */
 	public  int getHealth() {
 		return health;
 	}
 	
+	/**
+	 * sets this paddle's center to the given value.
+	 */
 	public  void setCenter(Point newCenter) {
 		this.center = newCenter;
 	}
 	
+	/**
+	 * sets this paddle's health to the given value.
+	 */
 	public  void setHealth(int newHealth) {
 		this.health = newHealth;
 	}

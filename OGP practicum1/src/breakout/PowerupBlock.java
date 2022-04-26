@@ -3,7 +3,7 @@ package breakout;
 import java.awt.Color;
 
 /**
- * Represents the state of a block in the breakout game.
+ * Represents the state of a powerup block in the breakout game.
  *
  * @immutable
  * @invar | getLocation() != null
@@ -33,6 +33,9 @@ public class PowerupBlock extends BlockState {
 		return location;
 	}
 	
+	/**
+	 * Returns this blocks color.
+	 */
 	public Color getColor() {
 		return color;
 	}
@@ -53,6 +56,9 @@ public class PowerupBlock extends BlockState {
 		return false;
 	}
 	
+	/**
+	 * Returns this blocks health.
+	 */
 	public int getHealth() {
 		return health;
 	}
