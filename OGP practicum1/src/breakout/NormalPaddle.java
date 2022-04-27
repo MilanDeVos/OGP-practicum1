@@ -28,7 +28,7 @@ public class NormalPaddle extends PaddleState {
 	 * @pre | health >= 0
 	 * 
 	 * @post | getCenter().equals(center)
-	 * @post | getColor().equals(health)
+	 * @post | getHealth() == (health)
 	 */
 	public NormalPaddle(Point center, int health) {
 		this.center = center;

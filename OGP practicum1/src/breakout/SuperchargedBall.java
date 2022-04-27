@@ -111,14 +111,18 @@ public class SuperchargedBall extends Ball {
 	
 	/**
 	 * sets this ball's lifetime to the given value.
+	 * 
+	 * @post | getLifetime() == newLifetime
 	 */
-	@Override
 	public void setLifetime(int newLifetime) {
 		this.lifetime = newLifetime;
 	}
 	
 	/**
 	 * sets this ball's center to the given value.
+	 * @pre |newCenter != null
+	 * 
+	 * @post | getCenter().equals(newCenter)
 	 */
 	@Override
 	public void setCenter(Point newCenter) {
@@ -127,6 +131,9 @@ public class SuperchargedBall extends Ball {
 	
 	/**
 	 * sets this ball's location to the given value.
+	 * @pre | newLocation != null
+	 * 
+	 * @post | getLocation().equals(newLocation)
 	 */
 	@Override
 	public void setLocation(Circle newLocation) {
@@ -135,6 +142,9 @@ public class SuperchargedBall extends Ball {
 	
 	/**
 	 * sets this ball's velocity to the given value.
+	 * @pre | newVelocity != null
+	 * 
+	 * @post | getVelocity().equals(newVelocity)
 	 */
 	@Override
 	public void setVelocity(Vector newVelocity) {

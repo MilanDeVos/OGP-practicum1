@@ -20,20 +20,16 @@ class PaddleTest {
 	}
 
 	@Test
-	void testPaddle() {
-		p1.setCenter(p11);
+	void testPaddle() { 
 		assertEquals(p11, p1.getCenter());
 		assertEquals(Color.RED, p1.getColor());
-		p1.setHealth(0);
 		assertEquals(0, p1.getHealth());
 		assertTrue(p1.isNormal());
 		assertFalse(p1.isReplicator());
 		
-		replip.setCenter(p11);
 		assertEquals(p11, replip.getCenter());
 		assertEquals(Color.BLUE, replip.getColor());
-		replip.setHealth(0);
-		assertEquals(0, replip.getHealth());
+		assertEquals(1000, replip.getHealth());
 		assertFalse(replip.isNormal());
 		assertTrue(replip.isReplicator());
 	}

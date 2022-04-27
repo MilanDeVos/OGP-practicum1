@@ -28,7 +28,7 @@ public class ReplicatorPaddle extends PaddleState {
 	 * @pre | health >= 0
 	 * 
 	 * @post | getCenter().equals(center)
-	 * @post | getColor().equals(health)
+	 * @post | getHealth() == health
 	 */
 	public ReplicatorPaddle(Point center, int health) {
 		this.center = center;
