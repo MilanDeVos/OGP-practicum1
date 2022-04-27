@@ -41,6 +41,7 @@ public class NormalBall extends Ball {
 	/**
 	 * Return this ball's location.
 	 */
+	@Override
 	public Circle getLocation() {
 		return location;
 	}
@@ -48,6 +49,7 @@ public class NormalBall extends Ball {
 	/**
 	 * Return this ball's velocity.
 	 */
+	@Override
 	public Vector getVelocity() {
 		return velocity;
 	}
@@ -61,7 +63,17 @@ public class NormalBall extends Ball {
 	 *       | (getVelocity().product(rect.collideWith(getLocation())) <= 0 && result == null) || 
 	 *       | (result.equals(getVelocity().mirrorOver(rect.collideWith(getLocation()))))
 	 */
+	@Override
 	public Vector bounceOn(Rect rect) {
+		Vector coldir = rect.collideWith(location);
+		if(coldir != null && velocity.product(coldir) > 0) {
+			return velocity.mirrorOver(coldir);
+		}
+		return null;
+	}
+	
+	@Override
+	public Vector hitBlock(Rect rect, boolean destroyed) {
 		Vector coldir = rect.collideWith(location);
 		if(coldir != null && velocity.product(coldir) > 0) {
 			return velocity.mirrorOver(coldir);
@@ -74,6 +86,7 @@ public class NormalBall extends Ball {
 	 * 
 	 * @post | getLocation().getCenter().equals(result)
 	 */
+	@Override
 	public Point getCenter() {
 		return getLocation().getCenter();
 	}
@@ -81,6 +94,7 @@ public class NormalBall extends Ball {
 	/**
 	 * Return this ball's lifetime.
 	 */
+	@Override
 	public int getLifetime() {
 		return lifetime;
 	}
@@ -88,6 +102,7 @@ public class NormalBall extends Ball {
 	/**
 	 * Return this ball's color.
 	 */
+	@Override
 	public Color getColor() {
 		return color;
 	}
@@ -95,6 +110,7 @@ public class NormalBall extends Ball {
 	/**
 	 * sets this ball's lifetime to the given value.
 	 */
+	@Override
 	public void setLifetime(int newLifetime) {
 		this.lifetime = newLifetime;
 	}
@@ -102,6 +118,7 @@ public class NormalBall extends Ball {
 	/**
 	 * sets this ball's center to the given value.
 	 */
+	@Override
 	public void setCenter(Point newCenter) {
 		this.location = new Circle(newCenter, 700);
 	}
@@ -109,6 +126,7 @@ public class NormalBall extends Ball {
 	/**
 	 * sets this ball's location to the given value.
 	 */
+	@Override
 	public void setLocation(Circle newLocation) {
 		this.location = newLocation;
 	}
@@ -116,14 +134,17 @@ public class NormalBall extends Ball {
 	/**
 	 * sets this ball's velocity to the given value.
 	 */
+	@Override
 	public void setVelocity(Vector newVelocity) {
 		this.velocity = newVelocity;
 	}
 	
+	@Override
 	public boolean isNormal() {
 		return true;
 	}
 	
+	@Override
 	public boolean isSupercharged() {
 		return false;
 	}

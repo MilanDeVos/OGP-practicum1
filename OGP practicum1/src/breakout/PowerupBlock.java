@@ -30,6 +30,7 @@ public class PowerupBlock extends BlockState {
 	/**
 	 * Return the rectangle occupied by this block in the field.
 	 */
+	@Override
 	public Rect getLocation() {
 		return location;
 	}
@@ -37,22 +38,35 @@ public class PowerupBlock extends BlockState {
 	/**
 	 * Returns this blocks color.
 	 */
+	@Override
 	public Color getColor() {
 		return color;
 	}
 	
+	@Override
+	public boolean isDestroyed() {
+		if (health <= 0) {
+			return true;
+		}
+		return false;
+	}
+	
+	@Override
 	public boolean isNormal() {
 		return false;
 	}
 	
+	@Override
 	public boolean isSturdy() {
 		return false;
 	}
 	
+	@Override
 	public boolean isPowerup() {
 		return true;
 	}
 	
+	@Override
 	public boolean isReplicator() {
 		return false;
 	}
@@ -60,6 +74,7 @@ public class PowerupBlock extends BlockState {
 	/**
 	 * Returns this blocks health.
 	 */
+	@Override
 	public int getHealth() {
 		return health;
 	}

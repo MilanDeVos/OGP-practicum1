@@ -3,6 +3,7 @@ package breakout;
 import java.awt.Color;
 
 /**
+ * @immutable
  * Represents the state of a block in the breakout game.
  */
 public abstract class BlockState {
@@ -16,6 +17,8 @@ public abstract class BlockState {
 	 * Returns this blocks color.
 	 */
 	public abstract Color getColor();
+	
+	public abstract boolean isDestroyed();
 	
 	public abstract boolean isNormal();
 	

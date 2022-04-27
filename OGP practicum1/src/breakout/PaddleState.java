@@ -5,8 +5,7 @@ import java.awt.Color;
 /**
  * Represents the state of a paddle in the breakout game.
  *
- * @mutable
- * @invar | getCenter() != null
+ * @immutable
  */
 public abstract class PaddleState {
 	
@@ -33,12 +32,12 @@ public abstract class PaddleState {
 	/**
 	 * sets this paddle's center to the given value.
 	 */
-	public abstract void setCenter(Point newCenter);
+	//public abstract void setCenter(Point newCenter);
 	
 	/**
 	 * sets this paddle's health to the given value.
 	 */
-	public abstract void setHealth(int newHealth);
+	//public abstract void setHealth(int newHealth);
 	
 	public abstract boolean isNormal();
 	
