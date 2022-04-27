@@ -137,6 +137,7 @@ public class BreakoutState {
 	/**
 	 * Return a ball with new velocity, after it collided with a wall
 	 * @pre | ball != null
+	 * 
 	 * @post | ball != null
 	 */
 	private Ball bounceWalls(Ball ball) {
@@ -151,18 +152,30 @@ public class BreakoutState {
 	}
 	/**
 	 *@pre | ball != null
+	 *
+	 *@post | ball != null
 	 */
 	private Ball removeDead(Ball ball) {
 		if( ball.getLocation().getBottommostPoint().getY() > bottomRight.getY()) { return null; }
 		else { return ball; }
 	}
-
+	
+	/**
+	 *@pre | b != null
+	 *
+	 *@post | b != null
+	 */
 	private Ball clampBall(Ball b) {
 		Circle loc = getFieldInternal().constrain(b.getLocation());
 		b.setLocation(loc);
 		return b;
 	}
 	
+	/**
+	 *@pre | ball != null
+	 *
+	 *@post | ball != null
+	 */
 	private Ball collideBallBlocks(Ball ball) {
 		for(int i=0; i < blocks.length; i++) {
 			Vector nspeed = ball.hitBlock(blocks[i].getLocation(), blocks[i].isDestroyed());
@@ -207,7 +220,9 @@ public class BreakoutState {
 		}
 		return ball;
 	}
-
+	/**
+	 *@pre | ball != null
+	 */
 	private Ball collideBallPaddle(Ball ball, Vector paddleVel) {
 		Vector nspeed = ball.bounceOn(paddle.getLocation());
 		if(nspeed != null) {
@@ -244,7 +259,10 @@ public class BreakoutState {
 		}
 		return ball;
 	}
-
+	
+	/**
+	 * removes the block out of the array.
+	 */
 	private void removeBlock(BlockState block) {
 		ArrayList<BlockState> nblocks = new ArrayList<BlockState>();
 		for( BlockState b : blocks ) {
