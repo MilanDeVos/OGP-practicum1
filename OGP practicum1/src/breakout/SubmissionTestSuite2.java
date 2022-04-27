@@ -31,8 +31,8 @@ class SubmissionTestSuite2 {
 	void testTickBounceBlock() {
 		stateBeforeBounceBlock.tick(1, 1);
 		assertEquals(1, stateBeforeBounceBlock.getBalls().length);
-		assertEquals(0, stateBeforeBounceBlock.getBlocks().length);
-		assertEquals(new Vector(0, -5), stateBeforeBounceBlock.getBalls()[0].getVelocity());
+		assertEquals(1, stateBeforeBounceBlock.getBlocks().length);
+		assertEquals(new Vector(0, 5), stateBeforeBounceBlock.getBalls()[0].getVelocity());
 	}
 
 	@Test
@@ -43,11 +43,11 @@ class SubmissionTestSuite2 {
 		BreakoutState stateBeforeBounceBlock2 = facade.createBreakoutState(oneBall, oneBlock2, bottomRight, paddle);
 		stateBeforeBounceBlock2.tick(1, 1);
 		assertEquals(1, stateBeforeBounceBlock2.getBalls().length);
-		assertEquals(1, stateBeforeBounceBlock2.getBlocks().length);
+		assertEquals(2, stateBeforeBounceBlock2.getBlocks().length);
 		stateBeforeBounceBlock2.tick(1, 1);
 		stateBeforeBounceBlock2.tick(1, 1);
 		assertEquals(1, stateBeforeBounceBlock2.getBalls().length);
-		assertEquals(0, stateBeforeBounceBlock2.getBlocks().length);
-		assertEquals(new Vector(0, -5), stateBeforeBounceBlock2.getBalls()[0].getVelocity());
+		assertEquals(2, stateBeforeBounceBlock2.getBlocks().length);
+		assertEquals(new Vector(0, 5), stateBeforeBounceBlock2.getBalls()[0].getVelocity());
 	}
 }

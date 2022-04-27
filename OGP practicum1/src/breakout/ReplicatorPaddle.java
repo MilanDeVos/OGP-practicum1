@@ -5,8 +5,8 @@ import java.awt.Color;
 /**
  * Represents the state of a replicator paddle in the breakout game.
  *
- * @immutable
  * @invar | getCenter() != null
+ * @invar | getHealth() >= 0
  */
 public class ReplicatorPaddle extends PaddleState {
 	
@@ -17,13 +17,17 @@ public class ReplicatorPaddle extends PaddleState {
 	
 	/**
 	 * @invar | center != null
+	 * @invar | health >= 0
 	 */
 	private Point center;
 	
 	/**
 	 * Construct a paddle located around a given center in the field.
 	 * @pre | center != null
+	 * @pre | health >= 0
+	 * 
 	 * @post | getCenter().equals(center)
+	 * @post | getColor().equals(health)
 	 */
 	public ReplicatorPaddle(Point center, int health) {
 		this.center = center;

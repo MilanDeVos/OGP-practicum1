@@ -5,21 +5,22 @@ import java.awt.Color;
 /**
  * Represents the state of a powerup block in the breakout game.
  *
- * @immutable
  * @invar | getLocation() != null
+ * @invar | getHealth() == -1
  */
 public class PowerupBlock extends BlockState {
 	
 	/**
 	 * @invar | location != null
 	 */
-	public final Rect location;
-	public final static Color color = Color.MAGENTA;
-	public final static int health = -1;
+	private final Rect location;
+	private final static Color color = Color.MAGENTA;
+	private final static int health = -1;
 	
 	/**
 	 * Construct a block occupying a given rectangle in the field.
 	 * @pre | location != null
+	 * 
 	 * @post | getLocation().equals(location)
 	 */
 	public PowerupBlock(Rect location) {

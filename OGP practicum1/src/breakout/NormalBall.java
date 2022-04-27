@@ -5,16 +5,32 @@ import java.awt.Color;
 /**
  * Represents the state of a normal ball in the breakout game.
  * 
- * @immutable
  * @invar | getLocation() != null
  * @invar | getVelocity() != null
+ * @invar | getLifetime() >= 0
+ * 
  */
 public class NormalBall extends Ball {
 	
+	/**
+	 * @invar | location != null
+	 * @invar | velocity != null
+	 * @invar | lifetime >= 0
+	 * 
+	 */
 	private Circle location;
 	private Vector velocity;
 	private int lifetime;
 	private final static Color color = Color.green;
+	
+	/**
+	 * @pre | location != null
+	 * @pre | velocity != null
+	 * 
+	 * @post | location == getLocation()
+	 * @post | velocity == getVelocity()
+	 * @post | lifetime == getLifetime()
+	 */
 	
 	public NormalBall(Circle location, Vector velocity, int lifetime) {
 		this.location = location;

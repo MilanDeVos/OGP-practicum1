@@ -5,21 +5,22 @@ import java.awt.Color;
 /**
  * Represents the state of a replicator block in the breakout game.
  *
- * @immutable
  * @invar | getLocation() != null
+ * @invar | getHealth() == -1
  */
 public class ReplicatorBlock extends BlockState {
 	
 	/**
 	 * @invar | location != null
 	 */
-	public final Rect location;
-	public final static Color color = Color.RED;
-	public final static int health = -1;
+	private final Rect location;
+	private final static Color color = Color.RED;
+	private final static int health = -1;
 	
 	/**
 	 * Construct a block occupying a given rectangle in the field.
 	 * @pre | location != null
+	 * 
 	 * @post | getLocation().equals(location)
 	 */
 	public ReplicatorBlock(Rect location) {

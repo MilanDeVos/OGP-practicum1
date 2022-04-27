@@ -5,21 +5,22 @@ import java.awt.Color;
 /**
  * Represents the state of a block in the breakout game.
  *
- * @immutable
  * @invar | getLocation() != null
+ * @invar | getHealth() != -1
  */
 public class SturdyBlock extends BlockState {
 	
 	/**
 	 * @invar | location != null
 	 */
-	public final Rect location;
-	public Color color;
-	public final int health;
+	private final Rect location;
+	private  Color color;
+	private final int health;
 	
 	/**
 	 * Construct a block occupying a given rectangle in the field.
 	 * @pre | location != null
+	 * 
 	 * @post | getLocation().equals(location)
 	 */
 	public SturdyBlock(Rect location, int health) {
@@ -43,6 +44,9 @@ public class SturdyBlock extends BlockState {
 		return location;
 	}
 	
+	/**
+	 * Returns this blocks color.
+	 */
 	public Color getColor() {
 		return color;
 	}
@@ -63,6 +67,9 @@ public class SturdyBlock extends BlockState {
 		return false;
 	}
 	
+	/**
+	 * Returns this blocks health.
+	 */
 	public int getHealth() {
 		return health;
 	}

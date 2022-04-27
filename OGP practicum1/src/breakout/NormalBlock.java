@@ -5,8 +5,8 @@ import java.awt.Color;
 /**
  * Represents the state of a normal block in the breakout game.
  *
- * @immutable
  * @invar | getLocation() != null
+ * @invar | getHealth() == -1
  */
 public class NormalBlock extends BlockState {
 	
@@ -15,11 +15,12 @@ public class NormalBlock extends BlockState {
 	 */
 	private final Rect location;
 	private final static Color color = Color.BLUE;
-	public final static int health = -1;
+	private final static int health = -1;
 	
 	/**
 	 * Construct a block occupying a given rectangle in the field.
 	 * @pre | location != null
+	 * 
 	 * @post | getLocation().equals(location)
 	 */
 	public NormalBlock(Rect location) {
