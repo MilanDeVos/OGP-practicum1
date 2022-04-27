@@ -12,6 +12,7 @@ public abstract class BlockState {
 	
 	/**
 	 * Return the rectangle occupied by this block in the field.
+	 * @pre 
 	 */
 	public abstract Rect getLocation();
 	

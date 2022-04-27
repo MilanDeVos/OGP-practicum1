@@ -133,7 +133,10 @@ public class BreakoutState {
 	public Rect getField() {
 		return getFieldInternal();
 	}
-
+	
+	/**
+	 * Return a ball with
+	 */
 	private Ball bounceWalls(Ball ball) {
 		//Circle loc = ball.getLocation();
 		for( Rect wall : walls) {
