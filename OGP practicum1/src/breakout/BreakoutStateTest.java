@@ -19,19 +19,19 @@ class BreakoutStateTest {
 	BreakoutState isDead;
 	BreakoutState isWon;
 	BreakoutState balls;
-	Ball[] threeBalls = {new NormalBall(new Circle(new Point(0,5),2), new Vector(5,-7), 0), new NormalBall(new Circle(new Point(0,5),2), new Vector(0,1), 0), new NormalBall(new Circle(new Point(0,5),2), new Vector(5,-7), 0)};
-	Ball[] balls1 = {new NormalBall(new Circle(new Point(0,5),2), new Vector(5,-7), 0)};
-	Ball[] balls2 = {new NormalBall(new Circle(new Point(0,5),2), new Vector(5,7), 0)};
-	Ball[] ballsTop = {new NormalBall(new Circle(new Point(0,5),2), new Vector(-1,-1), 0)};
-	Ball[] ballsLeft = {new NormalBall(new Circle(new Point(0,5),2), new Vector(-1,1), 0)};
-	Ball[] ballsRight = {new NormalBall(new Circle(new Point(0,5),2), new Vector(1,1), 0)};
-	Ball[] ballsBounceBlockUnder = {new NormalBall(new Circle(new Point(0,5),2), new Vector(0,-1), 0)};
-	Ball[] ballsBounceBlockTop = {new NormalBall(new Circle(new Point(0,5),2), new Vector(0,1), 0)};
-	Ball[] ballsBounceBlockLeft = {new NormalBall(new Circle(new Point(0,5),2), new Vector(1,0), 0)};
-	Ball[] ballsBounceBlockRight = {new NormalBall(new Circle(new Point(0,5),2), new Vector(-1,0), 0)};
-	Ball[] ballsBouncePaddle = {new NormalBall(new Circle(new Point(0,5),2), new Vector(5,7), 0)};
-	Ball[] ballsIsDead = {new NormalBall(new Circle(new Point(0,5),2), new Vector(5,7), 0)};
-	Ball[] ballsIsWon =  {new NormalBall(new Circle(new Point(0,5),2), new Vector(0,-1), 0)};
+	Ball[] threeBalls = {new NormalBall(new Circle(new Point(800,800),2), new Vector(5,-7), 0), new NormalBall(new Circle(new Point(800,800),2), new Vector(0,1), 0), new NormalBall(new Circle(new Point(800,800),2), new Vector(5,-7), 0)};
+	Ball[] balls1 = {new NormalBall(new Circle(new Point(800,800),2), new Vector(5,-7), 0)};
+	Ball[] balls2 = {new NormalBall(new Circle(new Point(800,800),2), new Vector(5,7), 0)};
+	Ball[] ballsTop = {new NormalBall(new Circle(new Point(800,800),2), new Vector(-1,-1), 0)};
+	Ball[] ballsLeft = {new NormalBall(new Circle(new Point(800,800),2), new Vector(-1,1), 0)};
+	Ball[] ballsRight = {new NormalBall(new Circle(new Point(800,800),2), new Vector(1,1), 0)};
+	Ball[] ballsBounceBlockUnder = {new NormalBall(new Circle(new Point(800,800),2), new Vector(0,-1), 0)};
+	Ball[] ballsBounceBlockTop = {new NormalBall(new Circle(new Point(800,800),2), new Vector(0,1), 0)};
+	Ball[] ballsBounceBlockLeft = {new NormalBall(new Circle(new Point(800,800),2), new Vector(1,0), 0)};
+	Ball[] ballsBounceBlockRight = {new NormalBall(new Circle(new Point(800,800),2), new Vector(-1,0), 0)};
+	Ball[] ballsBouncePaddle = {new NormalBall(new Circle(new Point(800,800),2), new Vector(5,7), 0)};
+	Ball[] ballsIsDead = {new NormalBall(new Circle(new Point(800,800),2), new Vector(5,7), 0)};
+	Ball[] ballsIsWon =  {new NormalBall(new Circle(new Point(800,800),2), new Vector(0,-1), 0)};
 	BlockState[] bounceBlocks = {new NormalBlock(new Rect(new Point(1,1),new Point(3,8))), new NormalBlock(new Rect(new Point(1,1),new Point(3,8))), new NormalBlock(new Rect(new Point(1,1),new Point(3,8)))};
 	BlockState[] blocks1 = {new NormalBlock(new Rect(new Point(1,1),new Point(3,8)))};
 	BlockState[] blocks2 = {new NormalBlock(new Rect(new Point(1,1),new Point(3,8)))};
@@ -39,34 +39,32 @@ class BreakoutStateTest {
 		
 	@BeforeEach
 	void setUp() throws Exception {
-		bos1 = new BreakoutState(balls1, blocks1, new Point(1,1), new NormalPaddle(new Point(0,0),0));
-		bos2 = new BreakoutState(balls2, blocks2, new Point(10,10), new NormalPaddle(new Point(30,10),0));
-		bounceTopWall = new BreakoutState(ballsTop, blocks2, new Point(30000,50000), new NormalPaddle(new Point(30,10),0));
-		bounceLeftWall = new BreakoutState(ballsLeft, blocks2, new Point(30000,50000), new NormalPaddle(new Point(30,10),0));
-		bounceRightWall = new BreakoutState(ballsRight, blocks2, new Point(30000,50000), new NormalPaddle(new Point(30,10),0));
-		bounceBlockUnder = new BreakoutState(ballsBounceBlockUnder, bounceBlocks, new Point(30000,50000), new NormalPaddle(new Point(30,10), 0));
-		bounceBlockTop = new BreakoutState(ballsBounceBlockTop, bounceBlocks, new Point(30000,50000), new NormalPaddle(new Point(30,10), 0));
-		bounceBlockLeft = new BreakoutState(ballsBounceBlockLeft, bounceBlocks, new Point(30000,50000), new NormalPaddle(new Point(30,10), 0));
-		bounceBlockRight = new BreakoutState(ballsBounceBlockRight, bounceBlocks, new Point(30000,50000), new NormalPaddle(new Point(30,10), 0));
-		bouncePaddle = new BreakoutState(ballsBouncePaddle, blocks1, new Point(50000, 30000), new NormalPaddle(new Point(25000, 30000), 0));
-		isDead = new BreakoutState(ballsIsDead, blocks1, new Point(50000, 30000), new NormalPaddle(new Point(10,10), 0));
-		isWon = new BreakoutState(ballsIsWon, bounceOneBlock, new Point(30000,50000), new NormalPaddle(new Point(30,10), 0));
-		balls = new BreakoutState(threeBalls, blocks1, new Point(50000, 30000), new NormalPaddle(new Point(30,10), 0));
+		bos1 = new BreakoutState(balls1, blocks1, new Point(1000000,1000000), new NormalPaddle(new Point(10000,10000),0));
+		bos2 = new BreakoutState(balls2, blocks2, new Point(1000000,1000000), new NormalPaddle(new Point(10000,10000),0));
+		bounceTopWall = new BreakoutState(ballsTop, blocks2, new Point(1000000,1000000), new NormalPaddle(new Point(10000,10000),0));
+		bounceLeftWall = new BreakoutState(ballsLeft, blocks2, new Point(1000000,1000000), new NormalPaddle(new Point(10000,10000),0));
+		bounceRightWall = new BreakoutState(ballsRight, blocks2, new Point(1000000,1000000), new NormalPaddle(new Point(10000,10000),0));
+		bounceBlockUnder = new BreakoutState(ballsBounceBlockUnder, bounceBlocks, new Point(1000000,1000000), new NormalPaddle(new Point(10000,10000), 0));
+		bounceBlockTop = new BreakoutState(ballsBounceBlockTop, bounceBlocks, new Point(1000000,1000000), new NormalPaddle(new Point(10000,10000), 0));
+		bounceBlockLeft = new BreakoutState(ballsBounceBlockLeft, bounceBlocks, new Point(1000000,1000000), new NormalPaddle(new Point(10000,10000), 0));
+		bounceBlockRight = new BreakoutState(ballsBounceBlockRight, bounceBlocks, new Point(1000000,1000000), new NormalPaddle(new Point(10000,10000), 0));
+		bouncePaddle = new BreakoutState(ballsBouncePaddle, blocks1, new Point(1000000,1000000), new NormalPaddle(new Point(25000, 30000), 0));
+		isDead = new BreakoutState(ballsIsDead, blocks1, new Point(1000000,1000000), new NormalPaddle(new Point(10000,10000), 0));
+		isWon = new BreakoutState(ballsIsWon, bounceOneBlock, new Point(1000000,1000000), new NormalPaddle(new Point(10000,10000), 0));
+		balls = new BreakoutState(threeBalls, blocks1, new Point(1000000,1000000), new NormalPaddle(new Point(10000,10000), 0));
 	}
 	
 	@Test
 	void testBreakoutState() {
-		assertEquals(bos1.getBalls()[0].getCenter().getX(), 0);
-		assertEquals(bos1.getBalls()[0].getCenter().getY(), 0);
-		//assertEquals(bos1.getBalls()[0].getSize().getX(), 10);
-		//assertEquals(bos1.getBalls()[0].getSize().getY(), 5);
+		assertEquals(bos1.getBalls()[0].getCenter().getX(), 800);
+		assertEquals(bos1.getBalls()[0].getCenter().getY(), 800);
+	
 		assertEquals(bos1.getBalls()[0].getVelocity().getX(), 5);
 		assertEquals(bos1.getBalls()[0].getVelocity().getY(), -7);
 		
-		assertEquals(bos2.getBalls()[0].getCenter().getX(), 10);
-		assertEquals(bos2.getBalls()[0].getCenter().getY(), 5);
-		//assertEquals(bos2.getBalls()[0].getSize().getX(), 5);
-		//assertEquals(bos2.getBalls()[0].getSize().getY(), 10);
+		assertEquals(bos2.getBalls()[0].getCenter().getX(), 800);
+		assertEquals(bos2.getBalls()[0].getCenter().getY(), 800);
+		
 		assertEquals(bos2.getBalls()[0].getVelocity().getX(), 5);
 		assertEquals(bos2.getBalls()[0].getVelocity().getY(), 7);
 		
@@ -80,19 +78,19 @@ class BreakoutStateTest {
 		//assertEquals(bos2.getBlocks()[0].getSize().getX(), 5);
 		//assertEquals(bos2.getBlocks()[0].getSize().getY(), 10);
 		
-		assertEquals(bos1.getBottomRight().getX(), 1);
-		assertEquals(bos1.getBottomRight().getY(), 1);
+		assertEquals(bos1.getBottomRight().getX(), 1000000);
+		assertEquals(bos1.getBottomRight().getY(), 1000000);
 		
-		assertEquals(bos2.getBottomRight().getX(), 10);
-		assertEquals(bos2.getBottomRight().getY(), 10);
+		assertEquals(bos2.getBottomRight().getX(), 1000000);
+		assertEquals(bos2.getBottomRight().getY(), 1000000);
 		
-		assertEquals(bos1.getPaddle().getCenter().getX(), 0);
-		assertEquals(bos1.getPaddle().getCenter().getY(), 0);
+		assertEquals(bos1.getPaddle().getCenter().getX(), 10000);
+		assertEquals(bos1.getPaddle().getCenter().getY(), 10000);
 		//assertEquals(bos1.getPaddle().getSize().getX(), 10);
 		//assertEquals(bos1.getPaddle().getSize().getY(), 5);
 		
-		assertEquals(bos2.getPaddle().getCenter().getX(), 30);
-		assertEquals(bos2.getPaddle().getCenter().getY(), 10);
+		assertEquals(bos2.getPaddle().getCenter().getX(), 10000);
+		assertEquals(bos2.getPaddle().getCenter().getY(), 10000);
 		//assertEquals(bos2.getPaddle().getSize().getX(), 5);
 		//assertEquals(bos2.getPaddle().getSize().getY(), 10);
 	}

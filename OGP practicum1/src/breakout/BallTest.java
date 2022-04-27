@@ -12,30 +12,38 @@ class BallTest {
 	Point p05;
 	Point p38;
 	Point pm14;
+	Point p1010;
 	
 	Rect r1138;
 	Rect rm1438;
+	Rect r10101010;
 	
 	Vector v1010;
 	
 	Circle c052;
 	Circle c389;
 	Ball b1;
+	Ball b2;
 	Ball superb;
+	Ball superb2;
 	
 	@BeforeEach
 	void setUp() throws Exception {
 		p11 = new Point(1,1);
 		p05 = new Point(0,5);
 		p38 = new Point(3,8);
+		p1010 = new Point(10,10);
 		pm14 = new Point(-1,4);
 		r1138 = new Rect(p11,p38);
 		rm1438 = new Rect(pm14,p38);
+		r10101010 = new Rect(p1010, p1010);
 		c052 = new Circle(p05,2);
 		c389 = new Circle(p38,9);
 		v1010 = new Vector(10,10);
 		b1 = new NormalBall(c052, v1010,0);
+		b2 = new NormalBall(new Circle(new Point(0,0), 1), new Vector(0,0),0);
 		superb = new SuperchargedBall(c052, v1010,1);
+		superb2 = new SuperchargedBall(new Circle(new Point(0,0), 1), new Vector(0,0),0);
 	}
 
 	@Test
@@ -75,5 +83,7 @@ class BallTest {
 	void testBounceOn() {
 		assertEquals(new Vector(-10,10),b1.bounceOn(r1138));
 		assertEquals(new Vector(-10,10),superb.bounceOn(r1138));
+		assertNull(b1.bounceOn(r10101010));
+		assertNull(superb2.bounceOn(r10101010));
 	}
 }

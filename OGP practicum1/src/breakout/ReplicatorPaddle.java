@@ -5,8 +5,9 @@ import java.awt.Color;
 /**
  * Represents the state of a replicator paddle in the breakout game.
  *
- * @immutable
+ *@immutable
  * @invar | getCenter() != null
+ * @invar | getHealth() >= 0
  */
 public class ReplicatorPaddle extends PaddleState {
 	
@@ -17,13 +18,17 @@ public class ReplicatorPaddle extends PaddleState {
 	
 	/**
 	 * @invar | center != null
+	 * @invar | health >= 0
 	 */
 	private Point center;
 	
 	/**
 	 * Construct a paddle located around a given center in the field.
 	 * @pre | center != null
+	 * @pre | health >= 0
+	 * 
 	 * @post | getCenter().equals(center)
+	 * @post | getHealth() == health
 	 */
 	public ReplicatorPaddle(Point center, int health) {
 		this.center = center;
@@ -33,6 +38,7 @@ public class ReplicatorPaddle extends PaddleState {
 	/**
 	 * Return the center point of this paddle.
 	 */
+	@Override
 	public Point getCenter() {
 		return center;
 	}
@@ -44,6 +50,7 @@ public class ReplicatorPaddle extends PaddleState {
 	 * @post | result.getTopLeft().equals(getCenter().plus(new Vector(-WIDTH/2,-HEIGHT/2)))
 	 * @post | result.getBottomRight().equals(getCenter().plus(new Vector(WIDTH/2,HEIGHT/2)))
 	 */
+	@Override
 	public Rect getLocation() {
 		Vector halfDiag = new Vector(-WIDTH/2,-HEIGHT/2);
 		return new Rect(center.plus(halfDiag), center.plus(halfDiag.scaled(-1)));
@@ -52,6 +59,7 @@ public class ReplicatorPaddle extends PaddleState {
 	/**
 	 * Returns this paddle's color.
 	 */
+	@Override
 	public Color getColor() {
 		return color;
 	}
@@ -59,28 +67,17 @@ public class ReplicatorPaddle extends PaddleState {
 	/**
 	 * Returns this paddle's health.
 	 */
+	@Override
 	public  int getHealth() {
 		return health;
 	}
 	
-	/**
-	 * sets this paddle's center to the given value.
-	 */
-	public  void setCenter(Point newCenter) {
-		this.center = newCenter;
-	}
-	
-	/**
-	 * sets this paddle's health to the given value.
-	 */
-	public  void setHealth(int newHealth) {
-		this.health = newHealth;
-	}
-	
+	@Override
 	public  boolean isNormal() {
 		return false;
 	}
 	
+	@Override
 	public  boolean isReplicator() {
 		return true;
 	}

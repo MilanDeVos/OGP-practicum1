@@ -5,16 +5,32 @@ import java.awt.Color;
 /**
  * Represents the state of a normal ball in the breakout game.
  * 
- * @immutable
  * @invar | getLocation() != null
  * @invar | getVelocity() != null
+ * @invar | getLifetime() >= 0
+ * 
  */
 public class NormalBall extends Ball {
 	
+	/**
+	 * @invar | location != null
+	 * @invar | velocity != null
+	 * @invar | lifetime >= 0
+	 * 
+	 */
 	private Circle location;
 	private Vector velocity;
 	private int lifetime;
 	private final static Color color = Color.green;
+	
+	/**
+	 * @pre | location != null
+	 * @pre | velocity != null
+	 * 
+	 * @post | location == getLocation()
+	 * @post | velocity == getVelocity()
+	 * @post | lifetime == getLifetime()
+	 */
 	
 	public NormalBall(Circle location, Vector velocity, int lifetime) {
 		this.location = location;
@@ -25,6 +41,7 @@ public class NormalBall extends Ball {
 	/**
 	 * Return this ball's location.
 	 */
+	@Override
 	public Circle getLocation() {
 		return location;
 	}
@@ -32,6 +49,7 @@ public class NormalBall extends Ball {
 	/**
 	 * Return this ball's velocity.
 	 */
+	@Override
 	public Vector getVelocity() {
 		return velocity;
 	}
@@ -45,7 +63,17 @@ public class NormalBall extends Ball {
 	 *       | (getVelocity().product(rect.collideWith(getLocation())) <= 0 && result == null) || 
 	 *       | (result.equals(getVelocity().mirrorOver(rect.collideWith(getLocation()))))
 	 */
+	@Override
 	public Vector bounceOn(Rect rect) {
+		Vector coldir = rect.collideWith(location);
+		if(coldir != null && velocity.product(coldir) > 0) {
+			return velocity.mirrorOver(coldir);
+		}
+		return null;
+	}
+	
+	@Override
+	public Vector hitBlock(Rect rect, boolean destroyed) {
 		Vector coldir = rect.collideWith(location);
 		if(coldir != null && velocity.product(coldir) > 0) {
 			return velocity.mirrorOver(coldir);
@@ -58,6 +86,7 @@ public class NormalBall extends Ball {
 	 * 
 	 * @post | getLocation().getCenter().equals(result)
 	 */
+	@Override
 	public Point getCenter() {
 		return getLocation().getCenter();
 	}
@@ -65,6 +94,7 @@ public class NormalBall extends Ball {
 	/**
 	 * Return this ball's lifetime.
 	 */
+	@Override
 	public int getLifetime() {
 		return lifetime;
 	}
@@ -72,42 +102,60 @@ public class NormalBall extends Ball {
 	/**
 	 * Return this ball's color.
 	 */
+	@Override
 	public Color getColor() {
 		return color;
 	}
 	
 	/**
 	 * sets this ball's lifetime to the given value.
+	 * 
+	 * @post | getLifetime() == newLifetime
 	 */
+	@Override
 	public void setLifetime(int newLifetime) {
 		this.lifetime = newLifetime;
 	}
 	
 	/**
 	 * sets this ball's center to the given value.
+	 * @pre |newCenter != null
+	 * 
+	 * @post | getCenter().equals(newCenter)
 	 */
+	@Override
 	public void setCenter(Point newCenter) {
 		this.location = new Circle(newCenter, 700);
 	}
 	
 	/**
 	 * sets this ball's location to the given value.
+	 * @pre | newLocation != null
+	 * 
+	 * @post | getLocation().equals(newLocation)
 	 */
+	@Override
 	public void setLocation(Circle newLocation) {
 		this.location = newLocation;
 	}
 	
 	/**
 	 * sets this ball's velocity to the given value.
+	 * @pre | newVelocity != null
+	 * 
+	 * @post | getVelocity().equals(newVelocity)
 	 */
+	@Override
 	public void setVelocity(Vector newVelocity) {
 		this.velocity = newVelocity;
 	}
 	
+	@Override
 	public boolean isNormal() {
 		return true;
 	}
 	
+	@Override
 	public boolean isSupercharged() {
 		return false;
 	}

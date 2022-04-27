@@ -3,11 +3,7 @@ package breakout;
 import java.awt.Color;
 
 /**
- * Represents the state of a ball in the breakout game.
- * 
- * @immutable
- * @invar | getLocation() != null
- * @invar | getVelocity() != null
+ * Represents the state of a normal ball in the breakout game.
  */
 public abstract class Ball {
 	
@@ -25,30 +21,44 @@ public abstract class Ball {
 	 * Check whether this ball collides with a given `rect` and if so, return the 
 	 * new velocity this ball will have after bouncing on the given rect.
 	 * 
-	 * @pre | rect != null
-	 * @post | (rect.collideWith(getLocation()) == null && result == null) ||
-	 *       | (getVelocity().product(rect.collideWith(getLocation())) <= 0 && result == null) || 
-	 *       | (result.equals(getVelocity().mirrorOver(rect.collideWith(getLocation()))))
 	 */
 	public abstract Vector bounceOn(Rect rect);
+	
+	public abstract Vector hitBlock(Rect rect, boolean destroyed);
 
 	/**
 	 * Return this point's center.
-	 * 
-	 * @post | getLocation().getCenter().equals(result)
 	 */
 	public abstract Point getCenter();
 	
+	/**
+	 * Return this ball's lifetime.
+	 */
 	public abstract int getLifetime();
 	
+	/**
+	 * Return this ball's color.
+	 */
 	public abstract Color getColor();
 	
+	/**
+	 * sets this ball's lifetime to the given value.
+	 */
 	public abstract void setLifetime(int newLifetime);
 	
+	/**
+	 * sets this ball's center to the given value.
+	 */
 	public abstract void setCenter(Point newCenter);
 	
+	/**
+	 * sets this ball's location to the given value.
+	 */
 	public abstract void setLocation(Circle newLocation);
 	
+	/**
+	 * sets this ball's velocity to the given value.
+	 */
 	public abstract void setVelocity(Vector newVelocity);
 	
 	public abstract boolean isNormal();
