@@ -24,6 +24,11 @@ public abstract class Ball {
 	 */
 	public abstract Vector bounceOn(Rect rect);
 	
+	/**
+	 * Check whether this ball collides with a given block and if so, return the 
+	 * new velocity this ball will have after bouncing on the given block, or passing trough the given block.
+	 * 
+	 */
 	public abstract Vector hitBlock(Rect rect, boolean destroyed);
 
 	/**

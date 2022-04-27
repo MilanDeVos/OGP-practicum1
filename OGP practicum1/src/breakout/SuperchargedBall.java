@@ -71,6 +71,11 @@ public class SuperchargedBall extends Ball {
 		return null;
 	}
 	
+	/**
+	 * Check whether this ball collides with a given block and if so, return the 
+	 * new velocity this ball will have after bouncing on the given block, or passing trough the given block.
+	 * 
+	 */
 	@Override
 	public Vector hitBlock(Rect rect, boolean destroyed) {
 		Vector coldir = rect.collideWith(location);
