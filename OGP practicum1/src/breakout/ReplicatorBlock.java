@@ -7,7 +7,6 @@ import java.awt.Color;
  *
  *@immutable
  * @invar | getLocation() != null
- * @invar | getHealth() == -1
  */
 public class ReplicatorBlock extends BlockState {
 	

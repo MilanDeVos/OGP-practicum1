@@ -7,7 +7,6 @@ import java.awt.Color;
  *
  *@immutable
  * @invar | getLocation() != null
- * @invar | getHealth() == -1
  */
 public class NormalBlock extends BlockState {
 	
@@ -27,7 +26,7 @@ public class NormalBlock extends BlockState {
 	public NormalBlock(Rect location) {
 		this.location = location;
 	}
-	
+
 	/**
 	 * Return the rectangle occupied by this block in the field.
 	 */

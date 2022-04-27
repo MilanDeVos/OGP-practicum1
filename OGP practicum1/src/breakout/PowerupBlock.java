@@ -6,7 +6,6 @@ import java.awt.Color;
  * Represents the state of a powerup block in the breakout game.
  *
  * @invar | getLocation() != null
- * @invar | getHealth() == -1
  */
 public class PowerupBlock extends BlockState {
 	

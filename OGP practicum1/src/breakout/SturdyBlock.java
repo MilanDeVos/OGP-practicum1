@@ -7,12 +7,14 @@ import java.awt.Color;
  *
  *@immutable
  * @invar | getLocation() != null
- * @invar | getHealth() != -1
+ * @invar | getHealth() >= 0
+ * @invar | getHealth() <=3
  */
 public class SturdyBlock extends BlockState {
 	
 	/**
 	 * @invar | location != null
+	 * @invar | health != -1
 	 */
 	private final Rect location;
 	private  Color color;
@@ -21,8 +23,12 @@ public class SturdyBlock extends BlockState {
 	/**
 	 * Construct a block occupying a given rectangle in the field.
 	 * @pre | location != null
+	 * @pre | health > 0
+	 * @pre | health <=3
 	 * 
 	 * @post | getLocation().equals(location)
+	 * @post | getHealth() == health
+	 * 
 	 */
 	public SturdyBlock(Rect location, int health) {
 		this.location = location;
