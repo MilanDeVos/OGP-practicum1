@@ -135,7 +135,9 @@ public class BreakoutState {
 	}
 	
 	/**
-	 * Return a ball with
+	 * Return a ball with new velocity, after it collided with a wall
+	 * @pre | ball != null
+	 * @post | ball != null
 	 */
 	private Ball bounceWalls(Ball ball) {
 		//Circle loc = ball.getLocation();
@@ -149,7 +151,9 @@ public class BreakoutState {
 		}
 		return ball;
 	}
-
+	/**
+	 *@pre | ball != null
+	 */
 	private Ball removeDead(Ball ball) {
 		if( ball.getLocation().getBottommostPoint().getY() > bottomRight.getY()) { return null; }
 		else { return ball; }
