@@ -30,17 +30,13 @@ public abstract class PaddleState {
 	public abstract int getHealth();
 	
 	/**
-	 * sets this paddle's center to the given value.
+	 * returns true or false if the paddle is normal or not
 	 */
-	//public abstract void setCenter(Point newCenter);
-	
-	/**
-	 * sets this paddle's health to the given value.
-	 */
-	//public abstract void setHealth(int newHealth);
-	
 	public abstract boolean isNormal();
 	
+	/**
+	 * returns true or false if the paddle is replicator or not
+	 */
 	public abstract boolean isReplicator();
 
 }

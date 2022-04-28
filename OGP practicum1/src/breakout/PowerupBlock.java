@@ -42,6 +42,9 @@ public class PowerupBlock extends BlockState {
 		return color;
 	}
 	
+	/**
+	 * returns true or false if the block is destroyed or not
+	 */
 	@Override
 	public boolean isDestroyed() {
 		if (health <= 0) {
@@ -50,21 +53,33 @@ public class PowerupBlock extends BlockState {
 		return false;
 	}
 	
+	/**
+	 * returns true or false if the block is normal or not
+	 */
 	@Override
 	public boolean isNormal() {
 		return false;
 	}
 	
+	/**
+	 * returns true or false if the block is sturdy or not
+	 */
 	@Override
 	public boolean isSturdy() {
 		return false;
 	}
 	
+	/**
+	 * returns true or false if the block is powerup or not
+	 */
 	@Override
 	public boolean isPowerup() {
 		return true;
 	}
 	
+	/**
+	 * returns true or false if the block is replicator or not
+	 */
 	@Override
 	public boolean isReplicator() {
 		return false;

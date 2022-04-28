@@ -222,6 +222,8 @@ public class BreakoutState {
 	}
 	/**
 	 *@pre | ball != null
+	 *
+	 *@mutates
 	 */
 	private Ball collideBallPaddle(Ball ball, Vector paddleVel) {
 		Vector nspeed = ball.bounceOn(paddle.getLocation());
@@ -295,7 +297,7 @@ public class BreakoutState {
 			}		
 		}
 	}
-
+	
 	private void bounceBallsOnPaddle(int paddleDir) {
 		Vector paddleVel = PADDLE_VEL.scaled(paddleDir);
 		for(int i = 0; i < balls.length; ++i) {

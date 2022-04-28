@@ -72,11 +72,17 @@ public class NormalPaddle extends PaddleState {
 		return health;
 	}
 	
+	/**
+	 * returns true or false if the paddle is normal or not
+	 */
 	@Override
 	public  boolean isNormal() {
 		return true;
 	}
 	
+	/**
+	 * returns true or false if the paddle is replicator or not
+	 */
 	@Override
 	public  boolean isReplicator() {
 		return false;

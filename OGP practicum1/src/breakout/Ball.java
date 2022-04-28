@@ -66,8 +66,14 @@ public abstract class Ball {
 	 */
 	public abstract void setVelocity(Vector newVelocity);
 	
+	/**
+	 * returns true or false if the ball is normal
+	 */
 	public abstract boolean isNormal();
 	
+	/**
+	 * returns true or false if the ball is supercharged
+	 */
 	public abstract boolean isSupercharged();
 	
 }

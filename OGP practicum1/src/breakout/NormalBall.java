@@ -24,14 +24,18 @@ public class NormalBall extends Ball {
 	private final static Color color = Color.green;
 	
 	/**
-	 * @pre | location != null
-	 * @pre | velocity != null
+	 * @pre the location cannot return null
+	 * | location != null
+	 * @pre the velocity cannot return null
+	 * | velocity != null
 	 * 
-	 * @post | location == getLocation()
-	 * @post | velocity == getVelocity()
-	 * @post | lifetime == getLifetime()
+	 * @post the ball's location is the given location
+	 * | location == getLocation()
+	 * @post the ball's velocity is the given velocity
+	 * | velocity == getVelocity()
+	 * @post the ball's lifetime is the given lifetime
+	 * | lifetime == getLifetime()
 	 */
-	
 	public NormalBall(Circle location, Vector velocity, int lifetime) {
 		this.location = location;
 		this.velocity = velocity;
@@ -75,7 +79,7 @@ public class NormalBall extends Ball {
 	/**
 	 * Check whether this ball collides with a given block and if so, return the 
 	 * new velocity this ball will have after bouncing on the given block, or passing trough the given block.
-	 * 
+	 * @inspects this
 	 */
 	@Override
 	public Vector hitBlock(Rect rect, boolean destroyed) {
@@ -116,6 +120,7 @@ public class NormalBall extends Ball {
 	 * sets this ball's lifetime to the given value.
 	 * 
 	 * @post | getLifetime() == newLifetime
+	 * @mutates this
 	 */
 	@Override
 	public void setLifetime(int newLifetime) {
@@ -127,6 +132,8 @@ public class NormalBall extends Ball {
 	 * @pre |newCenter != null
 	 * 
 	 * @post | getCenter().equals(newCenter)
+	 * @mutates this
+	 * @creates result
 	 */
 	@Override
 	public void setCenter(Point newCenter) {
@@ -138,6 +145,7 @@ public class NormalBall extends Ball {
 	 * @pre | newLocation != null
 	 * 
 	 * @post | getLocation().equals(newLocation)
+	 * @mutates this
 	 */
 	@Override
 	public void setLocation(Circle newLocation) {
@@ -149,17 +157,24 @@ public class NormalBall extends Ball {
 	 * @pre | newVelocity != null
 	 * 
 	 * @post | getVelocity().equals(newVelocity)
+	 * @mutates this
 	 */
 	@Override
 	public void setVelocity(Vector newVelocity) {
 		this.velocity = newVelocity;
 	}
 	
+	/**
+	 * returns true or false if the ball is normal
+	 */
 	@Override
 	public boolean isNormal() {
 		return true;
 	}
 	
+	/**
+	 * returns true or false if the ball is supercharged
+	 */
 	@Override
 	public boolean isSupercharged() {
 		return false;

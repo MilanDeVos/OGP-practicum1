@@ -24,12 +24,17 @@ public class SuperchargedBall extends Ball {
 	private final static Color color = Color.MAGENTA;
 	
 	/**
-	 * @pre | location != null
-	 * @pre | velocity != null
+	 * @pre the location cannot return null
+	 * | location != null
+	 * @pre the velocity cannot return null
+	 * | velocity != null
 	 * 
-	 * @post | location == getLocation()
-	 * @post | velocity == getVelocity()
-	 * @post | lifetime == getLifetime()
+	 * @post the ball's location is the given location
+	 * | location == getLocation()
+	 * @post the ball's velocity is the given velocity
+	 * | velocity == getVelocity()
+	 * @post the ball's lifetime is the given lifetime
+	 * | lifetime == getLifetime()
 	 */
 	public SuperchargedBall(Circle location, Vector velocity, int lifetime) {
 		this.location = location;
@@ -74,7 +79,7 @@ public class SuperchargedBall extends Ball {
 	/**
 	 * Check whether this ball collides with a given block and if so, return the 
 	 * new velocity this ball will have after bouncing on the given block, or passing trough the given block.
-	 * 
+	 * @inspect this
 	 */
 	@Override
 	public Vector hitBlock(Rect rect, boolean destroyed) {
@@ -118,6 +123,7 @@ public class SuperchargedBall extends Ball {
 	 * sets this ball's lifetime to the given value.
 	 * 
 	 * @post | getLifetime() == newLifetime
+	 * @mutates this
 	 */
 	public void setLifetime(int newLifetime) {
 		this.lifetime = newLifetime;
@@ -128,6 +134,8 @@ public class SuperchargedBall extends Ball {
 	 * @pre |newCenter != null
 	 * 
 	 * @post | getCenter().equals(newCenter)
+	 * @mutates this
+	 * @creates result
 	 */
 	@Override
 	public void setCenter(Point newCenter) {
@@ -139,6 +147,7 @@ public class SuperchargedBall extends Ball {
 	 * @pre | newLocation != null
 	 * 
 	 * @post | getLocation().equals(newLocation)
+	 * @mutates this
 	 */
 	@Override
 	public void setLocation(Circle newLocation) {
@@ -150,17 +159,24 @@ public class SuperchargedBall extends Ball {
 	 * @pre | newVelocity != null
 	 * 
 	 * @post | getVelocity().equals(newVelocity)
+	 * @mutates this
 	 */
 	@Override
 	public void setVelocity(Vector newVelocity) {
 		this.velocity = newVelocity;
 	}
 	
+	/**
+	 * returns true or false if the ball is normal
+	 */
 	@Override
 	public boolean isNormal() {
 		return false;
 	}
 	
+	/**
+	 * returns true or false if the ball is supercharged
+	 */
 	@Override
 	public boolean isSupercharged() {
 		return true;
