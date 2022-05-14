@@ -54,5 +54,8 @@ public class NormalBall extends Ball {
 	public Ball cloneWithVelocity(Vector v) {
 		return new NormalBall(getLocation(), v);
 	}
-
+	
+	public int getEcharge() {
+		return eCharge;
+	}
 }

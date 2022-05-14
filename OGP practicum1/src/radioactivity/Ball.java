@@ -2,6 +2,8 @@ package radioactivity;
 
 import java.awt.Color;
 import java.util.Objects;
+import java.util.Set;
+
 import utils.Circle;
 import utils.Vector;
 import utils.Rect;
@@ -18,7 +20,17 @@ public abstract class Ball {
 
 	protected Circle location;
 	protected Vector velocity;
-
+	/**
+	 * echarge != 0
+	 */
+	int eCharge;
+    /**
+     * @invar linkedAphas != null
+     * 
+     * @peerObjects
+     */
+    Set<Alpha> linkedAlphas;
+    
 	/**
 	 * Construct a new ball at a given `location`, with a given `velocity`.
 	 * 
@@ -188,4 +200,6 @@ public abstract class Ball {
 	public int hashCode() {
 		return Objects.hash(location, velocity);
 	}	
+	
+	public abstract int getEcharge();
 }

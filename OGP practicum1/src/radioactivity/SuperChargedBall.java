@@ -69,4 +69,7 @@ public class SuperChargedBall extends NormalBall {
 		return new SuperChargedBall(getLocation(), v, lifetime);
 	}
 
+	public int getEcharge() {
+		return eCharge;
+	}
 }
