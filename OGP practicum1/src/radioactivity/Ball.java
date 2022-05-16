@@ -21,7 +21,7 @@ public abstract class Ball {
 	protected Circle location;
 	protected Vector velocity;
 	/**
-	 * echarge != 0
+	 * eCharge != 0
 	 */
 	int eCharge;
     /**
@@ -42,6 +42,64 @@ public abstract class Ball {
 	public Ball(Circle location, Vector velocity) {
 		this.location = location;
 		this.velocity = velocity;
+	}
+	
+	public void CalculateECharge() {
+		int absValue;
+		if (this.linkedAlphas.isEmpty()) {
+			absValue = 1;
+		} else {
+			int maxBallSize = 0;
+			Alpha maxAlpha = null;
+			for(Alpha a: this.linkedAlphas) {
+				if (a.linkedBalls.size() > maxBallSize) {
+					maxBallSize = a.linkedBalls.size();
+					maxAlpha = a;
+				}
+			}
+			absValue = maxAlpha.linkedBalls.size();
+		}
+		if (this.linkedAlphas.size() % 2 == 0) {
+			this.eCharge = absValue;
+		} else {
+			this.eCharge = -absValue;
+		}
+	}
+	
+	/**
+	 * links this ball to an alpha pariticle
+	 * 
+	 * @throws IllegalArgumentException if {@code alpha} is null
+	 * |	alpha == null
+	 * 
+	 * @mutates_properties | this.getAlphas(), alpha.getBalls()
+	 * 
+	 * @post the given alpha's balls equal its old balls plus this ball.
+	 * 	MOET NOG GEBEUREN VANAF GETTERS WERKEN
+	 */
+	public void linkTo(Alpha alpha) {
+		if (alpha == null) {
+			throw new IllegalArgumentException("alpha_is_null");
+		}
+		this.linkedAlphas.add(alpha);
+		alpha.linkedBalls.add(this);
+	}
+	
+	/**
+	 * unlinks this ball from this particle
+	 * 
+	 * @mutates_properties | this.getAlphas(), alpha.getBalls()
+	 * 
+	 * @post the given alpha's balls equal its old balls minus this ball
+	 * MOET NOG GEBEUREN VANAF GETTERS WERKEN
+	 */
+	public void unLink(Alpha alpha) {
+		this.linkedAlphas.remove(alpha);
+		alpha.linkedBalls.remove(this);
+	}
+	
+	public Set<Alpha> getAlphas() {
+		return null; //moet met clones gedaan worden
 	}
 
 	/**

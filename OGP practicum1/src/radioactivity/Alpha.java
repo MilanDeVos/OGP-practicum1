@@ -9,5 +9,8 @@ public class Alpha {
      * @peerObjects
      */
     Set<Ball> linkedBalls;	
-
+    
+    public Set<Ball> getBalls() {
+    	return null; //moet met clones gedaan worden
+    }
 }
