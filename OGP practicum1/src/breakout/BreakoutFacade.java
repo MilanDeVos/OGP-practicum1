@@ -14,6 +14,7 @@ import utils.Point;
 
 //No documentation required for this class
 public class BreakoutFacade {
+	
 	public PaddleState createNormalPaddleState(Point center) {
 		return new NormalPaddleState(center);
 	}
@@ -31,7 +32,7 @@ public class BreakoutFacade {
 	}
 	
 	public Alpha createAlpha(Point center, int diameter, Vector speed) {
-		return null;
+		return new Alpha(new Circle(center, diameter), speed);
 	}
 
 	/**
@@ -81,7 +82,7 @@ public class BreakoutFacade {
 	}
 
 	public Color getColor(Alpha alpha) {
-		return null;
+		return alpha.getColor();
 	}
 
 	public Rect getLocation(PaddleState paddle) {
@@ -91,13 +92,18 @@ public class BreakoutFacade {
 	public Point getCenter(Ball ball) {
 		return ball.getLocation().getCenter();
 	}
+	
+	public Point getCenter(Alpha alpha) {
+		return alpha.getLocation().getCenter();
+	}
+
 
 	public int getDiameter(Ball ball) {
 		return ball.getLocation().getDiameter();
 	}
 
 	public int getDiameter(Alpha alpha) {
-		return 0; //TODO
+		return alpha.getLocation().getDiameter(); //TODO
 	}
 
 	public Ball[] getBalls(BreakoutState breakoutState) {
@@ -105,7 +111,7 @@ public class BreakoutFacade {
 	}
 
 	public Alpha[] getAlphas(BreakoutState breakoutState) {
-		return null;
+		return breakoutState.getAlphas();
 	}
 
 	public Color getColor(BlockState block) {
@@ -122,25 +128,25 @@ public class BreakoutFacade {
 	 * the peer references.)
 	 */
 	public Set<Ball> getBalls(Alpha alpha) {
-		return null;
+		return alpha.getBalls();
 	}
 	
 	public Set<Alpha> getAlphas(Ball ball) {
-		return null;
+		return ball.getAlphas();
 	}
 	
 	/**
 	 * note: re-adding a link does nothing
 	 */
 	public void addLink(Ball ball, Alpha alpha) {
-
+		ball.linkTo(alpha);
 	}
 	
 	/**
 	 * note: re-removing a link does nothing.
 	 */
 	public void removeLink(Ball ball, Alpha alpha) {
-
+		ball.unLink(alpha);
 	}
 	
 	/**

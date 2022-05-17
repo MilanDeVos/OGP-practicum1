@@ -1,6 +1,7 @@
 package radioactivity;
 
 import java.awt.Color;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -29,7 +30,7 @@ public abstract class Ball {
      * 
      * @peerObjects
      */
-    Set<Alpha> linkedAlphas;
+    Set<Alpha> linkedAlphas = new HashSet<Alpha>();
     
 	/**
 	 * Construct a new ball at a given `location`, with a given `velocity`.
@@ -99,7 +100,11 @@ public abstract class Ball {
 	}
 	
 	public Set<Alpha> getAlphas() {
-		return null; //moet met clones gedaan worden
+		Set<Alpha> theseAlphas = new HashSet<Alpha>();
+		for (Alpha a : linkedAlphas) {
+			 theseAlphas.add(a);
+		}
+		return theseAlphas; //moet met clones gedaan worden
 	}
 
 	/**

@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import radioactivity.Alpha;
 import radioactivity.Ball;
 import breakout.BlockState;
 import breakout.BreakoutFacade;
@@ -147,6 +148,8 @@ public class GameView extends JPanel {
 		paintBlocks(g);
 		paintBalls(g);
 		paintPaddle(g);
+		paintAlphas(g);
+		paintLinks(g);
 		
 		// domi: this fixes a visual latency bug on my system...
 		Toolkit.getDefaultToolkit().sync();
@@ -188,6 +191,36 @@ public class GameView extends JPanel {
 		Point br = toGUICoord(brg);
 		g.fillOval(tl.getX(), tl.getY(), br.getX() - tl.getX(), br.getY() - tl.getY());
 	}
+	
+	private void paintAlphas(Graphics g) {
+		for (Alpha alpha : facade.getAlphas(breakoutState)) {
+			Point center = facade.getCenter(alpha);
+			int diam = facade.getDiameter(alpha);
+			int radius = diam/2;
+			Point tl = center.plus(new Vector(-radius,-radius / 2)); //alphas are squished ovals for now
+			Color color = facade.getColor(alpha);
+			paintAlpha(g, color, tl, diam, radius);
+			
+		}
+	}
+	
+	private void paintAlpha(Graphics g, Color color, Point tlg , int width, int height) {
+		g.setColor(color);
+		Point tl = toGUICoord(tlg);
+		g.fillOval(tl.getX(), tl.getY(), width/50 , height/50);
+	}
+	
+	private void paintLinks(Graphics g) {
+		for (Ball ball : facade.getBalls(breakoutState) ) { //deep copy
+			for (Alpha alpha : facade.getAlphas(ball)) { //shallow cop
+				Point start = toGUICoord(facade.getCenter(ball));
+				Point end = toGUICoord(facade.getCenter(alpha));
+				g.setColor(Color.red);
+				g.drawLine(start.getX(), start.getY(), end.getX(), end.getY());
+			}
+		}
+	}
+
 
 	private void paintBlock(Graphics g, Point tlg, Point brg) {
 		Point tl = toGUICoord(tlg);

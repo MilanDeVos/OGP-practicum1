@@ -6,6 +6,7 @@ import utils.Circle;
 import utils.Vector;
 import utils.Rect;
 import utils.Point;
+import radioactivity.Alpha;
 import radioactivity.Ball;
 
 //import breakout.gui.GameView;
@@ -40,6 +41,13 @@ public class BreakoutState {
 	 * @representationObjects Each ball is a representation object
 	 */
 	private Ball[] balls;
+	/**
+	 * @invar | alphas != null
+	 * @invar | Arrays.stream(alphas).allMatch(b -> getFieldInternal().contains(b.getLocation()))
+	 * @representationObject
+	 * @representationObjects Each alpha is a representation object
+	 */
+	private Alpha[] alphas; 
 	/**
 	 * @invar | blocks != null
 	 * @invar | Arrays.stream(blocks).allMatch(b -> getFieldInternal().contains(b.getLocation()))
@@ -98,6 +106,7 @@ public class BreakoutState {
 		for(int i = 0; i < balls.length; ++i) {
 			this.balls[i] = balls[i].clone();
 		}
+		this.alphas = new Alpha[0];
 		this.blocks = blocks.clone();
 		this.paddle = paddle;
 
@@ -121,6 +130,20 @@ public class BreakoutState {
 		}
 		return res;
 //		return balls.clone();
+	}
+	
+	/**
+	 * Return the alphas of this BreakoutState.
+	 *
+	 * @creates result
+     * @creates ...result
+	 */
+	public Alpha[] getAlphas() {
+		Alpha[] res = new Alpha[alphas.length];
+		for (int i = 0 ; i < alphas.length ; ++i) {
+			res[i] = alphas[i].clone();
+		}
+		return res;
 	}
 
 	/**
@@ -222,6 +245,7 @@ public class BreakoutState {
 	 */
 	public void tick(int paddleDir, int elapsedTime) {
 		stepBalls(elapsedTime);
+		stepAlphas(elapsedTime);
 		bounceBallsOnWalls();
 		removeDeadBalls();
 		bounceBallsOnBlocks();
@@ -254,6 +278,18 @@ public class BreakoutState {
 				}
 			}
 			paddle = paddle.stateAfterHit();
+			
+			Alpha newAlpha = new Alpha(ball.getLocation(), ball.getVelocity().plus(new Vector(-2 ,-2)));
+			int alphasLength = alphas.length+1;
+			Alpha[] newAlphas = new Alpha[alphasLength];
+			if (alphasLength > 0) {
+				for(int j = 0 ; j < alphasLength-1 ; ++j) {
+					newAlphas[j] = alphas[j];
+				}
+			}
+			newAlphas[alphasLength-1] = newAlpha;
+			alphas = newAlphas;
+			ball.linkTo(newAlpha);
 		}
 	}
 
@@ -292,6 +328,13 @@ public class BreakoutState {
 			balls[i].move(balls[i].getVelocity().scaled(elapsedTime), elapsedTime);
 		}
 	}
+	
+	private void stepAlphas(int elapsedTime) {
+		for(int i = 0; i < alphas.length; ++i) {
+			alphas[i].move(alphas[i].getVelocity().scaled(elapsedTime), elapsedTime);
+		}
+	}
+	
 	/**
 	 * Move the paddle right.
 	 * 

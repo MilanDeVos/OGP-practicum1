@@ -6,6 +6,7 @@ import utils.Circle;
 import utils.Vector;
 import utils.Rect;
 import utils.Point;
+import radioactivity.Alpha;
 
 public class NormalBall extends Ball {
 
@@ -38,6 +39,9 @@ public class NormalBall extends Ball {
 	public void hitPaddle(Rect rect, Vector paddleVel) {
 		Vector nspeed = bounceOn(rect);
 		velocity = nspeed.plus(paddleVel.scaledDiv(5));
+		//Alpha newAlpha = new Alpha(this.getLocation(), this.getVelocity().plus(new Vector(-2 ,-2)));
+		//this.linkedAlphas.add(newAlpha);
+		System.out.println(linkedAlphas.size());
 	}
 
 	@Override
