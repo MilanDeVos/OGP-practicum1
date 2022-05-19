@@ -4,8 +4,10 @@ import java.awt.Color;
 import java.util.HashSet;
 import java.util.Set;
 
+import breakout.BreakoutState;
 import utils.Circle;
 import utils.Point;
+import utils.Rect;
 import utils.Vector;
 
 public class Alpha {
@@ -59,12 +61,79 @@ public class Alpha {
 		return velocity;
 	}
 	
+	/**
+	 * Check whether this alpha collides with a given `rect` and if so, return the
+	 * new velocity this alpha will have after bouncing on the given rect.
+	 * 
+	 * @pre | rect != null
+	 * @post | (rect.collideWith(getLocation()) == null && result == null) ||
+	 *       | (rect.collideWith(getLocation()) != null && getVelocity().product(rect.collideWith(getLocation())) <= 0 && result == null) ||
+	 *       | (rect.collideWith(getLocation()) != null && result.equals(getVelocity().mirrorOver(rect.collideWith(getLocation()))))
+	 * @inspects this
+	 */
+	public Vector bounceOn(Rect rect) {
+		Vector coldir = rect.collideWith(location);
+		if (coldir != null && velocity.product(coldir) > 0) {
+			return velocity.mirrorOver(coldir);
+		}
+		return null;
+	}
+	
+	/**
+	 * Check whether this ball collides with a given `rect`.
+	 * 
+	 * @pre | rect != null
+	 * @post | result == ((rect.collideWith(getLocation()) != null) &&
+	 *       |            (getVelocity().product(rect.collideWith(getLocation())) > 0))
+	 * @inspects this
+	 */
+	public boolean collidesWith(Rect rect) {
+		Vector coldir = rect.collideWith(getLocation());
+		return coldir != null && (getVelocity().product(coldir) > 0);
+	}
+	
 	public Color getColor() {
 		return ALPHA_COLOR;
 	}
 	
+	/**
+	 * Move this Alpha by the given vector.
+	 * 
+	 * @pre | v != null
+	 * @pre | elapsedTime >= 0
+	 * @pre | elapsedTime <= BreakoutState.MAX_ELAPSED_TIME
+	 * @post | getLocation().getCenter().equals(old(getLocation()).getCenter().plus(v))
+	 * @post | getLocation().getDiameter() == old(getLocation()).getDiameter()
+	 * @mutates this
+	 */
     public void move(Vector v, int elapsedTime) {
 		location = new Circle(getLocation().getCenter().plus(v), getLocation().getDiameter());
+	}
+    
+    /**
+	 * Update the Alpha after hitting a paddle at a given location.
+	 * 
+	 * @pre | rect != null
+	 * @pre | collidesWith(rect)
+	 * @pre | paddleVel != null
+	 * @post | getLocation().equals(old(getLocation()))
+	 * @mutates this
+	 */
+    public void hitPaddle(Rect rect, Vector paddleVel) {
+		Vector nspeed = bounceOn(rect);
+		velocity = nspeed.plus(paddleVel.scaledDiv(5));
+	}
+    
+    /**
+	 * Update the Alpha after hitting a wall at a given location.
+	 * 
+	 * @pre | rect != null
+	 * @pre | collidesWith(rect)
+	 * @post | getLocation().equals(old(getLocation()))
+	 * @mutates this
+	 */
+    public void hitWall(Rect rect) {
+		velocity = bounceOn(rect);
 	}
     
     public Alpha cloneWithVelocity(Vector v) {
@@ -72,7 +141,7 @@ public class Alpha {
 	}
     
     /**
-	 * Return a clone of this BallState.
+	 * Return a clone of this ALpha.
 	 * 
 	 * @inspects this
 	 * @creates result

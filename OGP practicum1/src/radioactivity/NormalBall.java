@@ -41,7 +41,6 @@ public class NormalBall extends Ball {
 		velocity = nspeed.plus(paddleVel.scaledDiv(5));
 		//Alpha newAlpha = new Alpha(this.getLocation(), this.getVelocity().plus(new Vector(-2 ,-2)));
 		//this.linkedAlphas.add(newAlpha);
-		System.out.println(linkedAlphas.size());
 	}
 
 	@Override

@@ -45,7 +45,7 @@ public abstract class Ball {
 		this.velocity = velocity;
 	}
 	
-	public void CalculateECharge() {
+	public int getECharge() {
 		int absValue;
 		if (this.linkedAlphas.isEmpty()) {
 			absValue = 1;
@@ -65,6 +65,7 @@ public abstract class Ball {
 		} else {
 			this.eCharge = -absValue;
 		}
+		return this.eCharge;
 	}
 	
 	/**

@@ -40,7 +40,8 @@ public class BreakoutFacade {
 	 */
 	public BreakoutState createBreakoutState(Ball[] balls, BlockState[] blocks, Point bottomRight,
 			PaddleState paddle) {
-		return new BreakoutState(balls, blocks, bottomRight, paddle);
+		Alpha[] alphas = new Alpha[0];
+		return new BreakoutState(alphas, balls, blocks, bottomRight, paddle);
 	}
 
 	/**
@@ -54,7 +55,7 @@ public class BreakoutFacade {
 			BlockState[] blocks,
 			Point bottomRight,
 			PaddleState paddle) {
-		return null;
+		return new BreakoutState(alphas, balls, blocks, bottomRight, paddle);
 	}
 
 	public BlockState createNormalBlockState(Point topLeft, Point bottomRight) {
@@ -153,14 +154,14 @@ public class BreakoutFacade {
 	 * should be in constant time (forwarding private charge)
 	 */
 	public int getEcharge(Ball ball) {
-		return 0; //TODO
+		return ball.getEcharge(); //TODO
 	}
 	
 	/**
 	 * mutates the position and diam of ball
 	 */
 	public void setLocation(Ball ball, Point center, int diam) {
-
+		
 	}
 	
 	public void setLocation(Alpha alpha, Point center, int diam) {
@@ -180,33 +181,33 @@ public class BreakoutFacade {
 	
 
 	public Vector getVelocity(Ball ball) {
-		return null;
+		return ball.getVelocity();
 	}
 	
 	public Vector getVelocity(Alpha alpha) {
-		return null;
+		return alpha.getVelocity();
 	}
 	
 	public void hitBlock(Ball ball, Rect rect, boolean destroyed) {
-
+		ball.hitBlock(rect, destroyed);
 	}
 	
 
 	
 	public BlockState[] getBlocks(BreakoutState state) {
-		return null;
+		return state.getBlocks();
 	}
 	
 	public Point getBottomRight(BreakoutState state) {
-		return null;
+		return state.getBottomRight();
 	}
 	
 	public PaddleState getPaddle(BreakoutState state) {
-		return null;
+		return state.getPaddle();
 	}
 	
 	public void tick(BreakoutState state, int paddleDir, int elapsedTime) {
-
+		state.tick(paddleDir, elapsedTime);
 	}
 	
 	public void tickDuring(BreakoutState state, int elapsedTime) {
@@ -268,11 +269,11 @@ public class BreakoutFacade {
 	}
 	
 	public void movePaddleRight(BreakoutState state, int elapsedTime) {
-
+		state.movePaddleRight(elapsedTime);
 	}
 	
 	public void movePaddleLeft(BreakoutState state, int elapsedTime) {
-
+		state.movePaddleLeft(elapsedTime);
 	}
 	
 	public boolean collidesWith(Ball ball, Rect rect) {

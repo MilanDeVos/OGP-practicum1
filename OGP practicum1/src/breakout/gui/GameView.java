@@ -141,15 +141,16 @@ public class GameView extends JPanel {
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 
-		Point topRight = toGUICoord(breakoutState.getBottomRight());
+		Point botRight = toGUICoord(facade.getBottomRight(breakoutState));
 		g.setColor(Color.black);
-		g.drawRect(0, 0, topRight.getX(), topRight.getY());
+		g.drawRect(0, 0, botRight.getX(), botRight.getY());
 
 		paintBlocks(g);
 		paintBalls(g);
-		paintPaddle(g);
-		paintAlphas(g);
+		paintAlphas(g); //squished circles in principle.
 		paintLinks(g);
+		paintPaddle(g);
+
 		
 		// domi: this fixes a visual latency bug on my system...
 		Toolkit.getDefaultToolkit().sync();
