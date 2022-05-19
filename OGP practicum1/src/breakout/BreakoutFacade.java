@@ -161,22 +161,22 @@ public class BreakoutFacade {
 	 * mutates the position and diam of ball
 	 */
 	public void setLocation(Ball ball, Point center, int diam) {
-		
+		ball.setLocation(center, diam);
 	}
 	
 	public void setLocation(Alpha alpha, Point center, int diam) {
-
+		alpha.setLocation(center, diam);
 	}
 
 	/**
 	 * mutates the velocity of ball
 	 */
 	public void setSpeed(Ball ball, Vector speed) {
-
+		ball.setVelocity(speed);
 	}
 	
 	public void setSpeed(Alpha alpha, Vector speed) {
-
+		alpha.setVelocity(speed);
 	}
 	
 

@@ -24,7 +24,7 @@ public abstract class Ball {
 	/**
 	 * eCharge != 0
 	 */
-	int eCharge;
+	int eCharge = 1;
     /**
      * @invar linkedAphas != null
      * 
@@ -45,26 +45,30 @@ public abstract class Ball {
 		this.velocity = velocity;
 	}
 	
-	public int getECharge() {
+	public int calculateEcharge() {
 		int absValue;
 		if (this.linkedAlphas.isEmpty()) {
 			absValue = 1;
 		} else {
 			int maxBallSize = 0;
-			Alpha maxAlpha = null;
 			for(Alpha a: this.linkedAlphas) {
-				if (a.linkedBalls.size() > maxBallSize) {
-					maxBallSize = a.linkedBalls.size();
-					maxAlpha = a;
+				if (a.getBalls().size() > maxBallSize) {
+					maxBallSize = a.getBalls().size();
 				}
 			}
-			absValue = maxAlpha.linkedBalls.size();
+			absValue = maxBallSize;
 		}
 		if (this.linkedAlphas.size() % 2 == 0) {
-			this.eCharge = absValue;
+			eCharge = absValue;
 		} else {
-			this.eCharge = -absValue;
+			eCharge = -absValue;
 		}
+		System.out.print("eCharge:");
+		System.out.println(eCharge);
+		return eCharge;
+	}
+	
+	public int getEcharge() {
 		return this.eCharge;
 	}
 	
@@ -85,6 +89,7 @@ public abstract class Ball {
 		}
 		this.linkedAlphas.add(alpha);
 		alpha.linkedBalls.add(this);
+		this.eCharge = calculateEcharge();
 	}
 	
 	/**
@@ -265,5 +270,13 @@ public abstract class Ball {
 		return Objects.hash(location, velocity);
 	}	
 	
-	public abstract int getEcharge();
+//	public abstract int getEcharge();
+	
+	public void setLocation(Point newCenter, int newDiam) {
+		this.location = new Circle(newCenter, newDiam);
+	}
+	
+	public void setVelocity(Vector newVelocity) {
+		this.velocity = newVelocity;
+	}
 }

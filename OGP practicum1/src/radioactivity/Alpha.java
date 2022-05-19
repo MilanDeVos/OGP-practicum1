@@ -151,4 +151,12 @@ public class Alpha {
 	public Alpha clone() {
 		return cloneWithVelocity(getVelocity());
 	}
+	
+	public void setLocation(Point newCenter, int newDiam) {
+		this.location = new Circle(newCenter, newDiam);
+	}
+	
+	public void setVelocity(Vector newVelocity) {
+		this.velocity = newVelocity;
+	}
 }

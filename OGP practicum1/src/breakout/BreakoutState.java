@@ -8,6 +8,7 @@ import utils.Rect;
 import utils.Point;
 import radioactivity.Alpha;
 import radioactivity.Ball;
+import radioactivity.NormalBall;
 
 //import breakout.gui.GameView;
 
@@ -225,6 +226,9 @@ public class BreakoutState {
 		for (Rect wall : walls) {
 			if (alpha.collidesWith(wall)) {
 				alpha.hitWall(wall);
+				for (Ball ball : alpha.getBalls()) {
+					ball.setVelocity(Vector.magnetSpeed(alpha.getCenter(), ball.getCenter(), ball.getEcharge(), ball.getVelocity()));
+				}
 			}
 		}
 	}
@@ -347,13 +351,20 @@ public class BreakoutState {
 			newAlphas[alphasLength-1] = newAlpha;
 			ball.linkTo(newAlpha);
 			alphas = newAlphas;
-			System.out.println(ball.getAlphas().size());
 		}
 	}
 	
 	private void collideAlphaPaddle(Alpha alpha,  Vector paddleVel) {
 		if (alpha.collidesWith(paddle.getLocation())) {
 			alpha.hitPaddle(paddle.getLocation(),paddleVel);
+			Ball newBall = new NormalBall(alpha.getLocation(), alpha.getVelocity().plus(new Vector(-2,-2)));
+			Ball[] newBalls = new Ball[balls.length+1];
+			for (int i = 0 ; i < balls.length ; ++i) {
+				newBalls[i] = balls[i];
+			}
+			newBalls[balls.length] = newBall;
+			balls = newBalls;
+			newBall.linkTo(alpha);
 		}
 	}
 

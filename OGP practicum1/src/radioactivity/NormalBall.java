@@ -58,7 +58,7 @@ public class NormalBall extends Ball {
 		return new NormalBall(getLocation(), v);
 	}
 	
-	public int getEcharge() {
-		return eCharge;
-	}
+//	public int getEcharge() {
+//		return eCharge;
+//	}
 }
